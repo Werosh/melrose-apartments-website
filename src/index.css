@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* Custom Fonts */
+@layer base {
+  :root {
+    --melrose-color: #36b3a8;
+    --bg-color: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+  }
+
+  /* Proxima Nova Alternative (Inter) for CTA, Navbar, and Box Headings */
+  .cta-button,
+  .navbar-text,
+  .box-heading {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.6s ease-out;
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s ease-in-out;
+}
+
+/* CTA Button Styles */
+.cta-button {
+  background-color: var(--melrose-color);
+  color: #ffffff;
+  padding: 14px 32px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-decoration: none;
+  border: 2px solid var(--melrose-color);
+}
+
+.cta-button:hover {
+  background-color: #2a9d94;
+  border-color: #2a9d94;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(54, 179, 168, 0.3);
+}
+
+.cta-button-secondary {
+  background-color: transparent;
+  color: var(--melrose-color);
+  border: 2px solid var(--melrose-color);
+}
+
+.cta-button-secondary:hover {
+  background-color: var(--melrose-color);
+  color: #ffffff;
+}
+
+/* Loading and Performance Optimizations */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}
