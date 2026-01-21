@@ -78,6 +78,52 @@ const Location = () => {
 
   return (
     <main className="pt-20">
+      <title>Location & Directions - Melrose Apartments North Melbourne | How to Find Us</title>
+      <meta name="description" content="Find Melrose Apartments at 171 Melrose Street, North Melbourne VIC 3051. Easy access via tram routes 55 & 59, CityLink, M2, and Melbourne Airport. Get directions and map." />
+      <meta name="keywords" content="Melrose Apartments location, North Melbourne location, 171 Melrose Street, North Melbourne VIC 3051, Melbourne accommodation address, Melbourne serviced apartments location, Melbourne apartment location, Melbourne hotel location, Melbourne accommodation directions, Melbourne accommodation map, Melbourne accommodation GPS, Melbourne accommodation coordinates, Melbourne accommodation find us, Melbourne accommodation how to get there, Melbourne accommodation transport, Melbourne accommodation public transport, Melbourne accommodation tram, Melbourne accommodation bus, Melbourne accommodation train, Melbourne accommodation tram route 55, Melbourne accommodation tram route 59, Melbourne accommodation CityLink, Melbourne accommodation M2, Melbourne accommodation route 79, Melbourne accommodation Boundary Road, Melbourne accommodation Melrose Street, Melbourne accommodation North Melbourne directions, Melbourne accommodation CBD directions, Melbourne accommodation airport directions, Melbourne accommodation Tullamarine directions, Melbourne accommodation Melbourne Airport directions, Melbourne accommodation from airport, Melbourne accommodation to airport, Melbourne accommodation airport shuttle, Melbourne accommodation Star Bus, Melbourne accommodation door to door, Melbourne accommodation pickup, Melbourne accommodation drop off, Melbourne accommodation transfer, Melbourne accommodation taxi, Melbourne accommodation Uber, Melbourne accommodation rideshare, Melbourne accommodation driving directions, Melbourne accommodation car directions, Melbourne accommodation parking directions, Melbourne accommodation parking available, Melbourne accommodation parking spaces, Melbourne accommodation parking cost, Melbourne accommodation parking fee, Melbourne accommodation free parking, Melbourne accommodation paid parking, Melbourne accommodation street parking, Melbourne accommodation secure parking, Melbourne accommodation covered parking, Melbourne accommodation underground parking, Melbourne accommodation valet parking, Melbourne accommodation disabled parking, Melbourne accommodation wheelchair parking, Melbourne accommodation accessible parking" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://www.melroseapartments.com.au/location" />
+      
+      {/* Open Graph */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.melroseapartments.com.au/location" />
+      <meta property="og:title" content="Location & Directions - Melrose Apartments North Melbourne" />
+      <meta property="og:description" content="Find us at 171 Melrose Street, North Melbourne VIC 3051. Easy access via tram routes 55 & 59, CityLink, M2, and Melbourne Airport." />
+      <meta property="og:image" content="https://picsum.photos/1920/1080?random=13" />
+      
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Location & Directions - Melrose Apartments North Melbourne" />
+      <meta name="twitter:description" content="Find us at 171 Melrose Street, North Melbourne VIC 3051. Easy access via tram, CityLink, and Melbourne Airport." />
+      
+      {/* Geo Tags */}
+      <meta name="geo.region" content="AU-VIC" />
+      <meta name="geo.placename" content="North Melbourne" />
+      <meta name="geo.position" content="-37.8065;144.9478" />
+      <meta name="ICBM" content="-37.8065, 144.9478" />
+      
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Hotel",
+          "name": "Melrose Apartments",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "171 Melrose Street",
+            "addressLocality": "North Melbourne",
+            "addressRegion": "VIC",
+            "postalCode": "3051",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.8065,
+            "longitude": 144.9478
+          },
+          "hasMap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093144!2d144.9478!3d-37.8065"
+        })}
+      </script>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden">
         {/* Background Image */}
@@ -169,14 +215,14 @@ const Location = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-lg shadow-xl overflow-hidden"
+              className="bg-gray-100 rounded-lg shadow-xl overflow-hidden"
             >
-              <div className="h-96 w-full">
+              <div className="h-96 w-full relative">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093144!2d144.9478!3d-37.8065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d65c8d8c93f%3A0x0!2zMzfCsDQ4JzIzLjQiUyAxNDTCsDU2JzUyLjEiRQ!5e0!3m2!1sen!2sau!4v1234567890!5m2!1sen!2sau"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d197.06054399264772!2d144.94212291720498!3d-37.79077319954816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d2170d49357%3A0xf47b31520e10a345!2sMelrose%20Apartments!5e0!3m2!1sen!2slk!4v1768970159962!5m2!1sen!2slk"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  style={{ border: 0, filter: 'grayscale(50%)' }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

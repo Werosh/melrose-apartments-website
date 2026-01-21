@@ -70,6 +70,65 @@ const Accommodation = () => {
 
   return (
     <main className="pt-20">
+      <title>Studio Apartments North Melbourne - Melrose Apartments | 4 Star Accommodation</title>
+      <meta name="description" content="Discover our modern Studio and Interconnecting Studio Apartments in North Melbourne. Fully equipped kitchens, WiFi, parking, and all amenities. Perfect for 1-4 guests. Book now!" />
+      <meta name="keywords" content="studio apartments Melbourne, studio apartments North Melbourne, interconnecting apartments Melbourne, Melbourne studio accommodation, 1 bedroom apartments Melbourne, 2 bedroom apartments Melbourne, furnished studio apartments Melbourne, self contained apartments Melbourne, apartments with kitchen Melbourne, Melbourne apartment rentals, Melbourne serviced apartments, Melbourne extended stay apartments, Melbourne short stay apartments, Melbourne business apartments, Melbourne family apartments, Melbourne relocation apartments, Melbourne temporary accommodation, Melbourne furnished apartments, Melbourne apartment hotel, Melbourne apartment accommodation, Melbourne apartment booking, Melbourne apartment deals, Melbourne apartment rates, Melbourne apartment prices, best studio apartments Melbourne, top rated apartments Melbourne, Melbourne apartment reviews, Melbourne apartment ratings, Melbourne apartment amenities, Melbourne apartment features, Melbourne apartment facilities, Melbourne apartment services, Melbourne apartment WiFi, Melbourne apartment parking, Melbourne apartment air conditioning, Melbourne apartment heating, Melbourne apartment TV, Melbourne apartment phone, Melbourne apartment kitchen, Melbourne apartment microwave, Melbourne apartment queen bed, Melbourne apartment capacity, Melbourne apartment size, Melbourne apartment layout, Melbourne apartment floor plan, Melbourne apartment virtual tour, Melbourne apartment photos, Melbourne apartment images, Melbourne apartment gallery, Melbourne apartment availability, Melbourne apartment booking online, Melbourne apartment instant booking, Melbourne apartment 24/7 booking, Melbourne apartment check in, Melbourne apartment check out, Melbourne apartment early check in, Melbourne apartment late check out, Melbourne apartment flexible check in, Melbourne apartment contactless check in, Melbourne apartment self check in, Melbourne apartment keyless entry, Melbourne apartment access, Melbourne apartment directions, Melbourne apartment location, Melbourne apartment map, Melbourne apartment nearby, Melbourne apartment close to, Melbourne apartment walking distance, Melbourne apartment tram stop, Melbourne apartment public transport, Melbourne apartment CBD access, Melbourne apartment hospital access, Melbourne apartment airport access, Melbourne apartment CityLink access, Melbourne apartment M2 access, Melbourne apartment route 79 access, Melbourne apartment Boundary Road access, Melbourne apartment Melrose Street access, Melbourne apartment North Melbourne access, Melbourne apartment VIC 3051 access, Melbourne apartment postcode 3051 access, Melbourne apartment area code 3051 access, Melbourne apartment suburb North Melbourne access, Melbourne apartment inner city access, Melbourne apartment inner north access, Melbourne apartment inner Melbourne access, Melbourne apartment metropolitan access, Melbourne apartment Victoria access, Melbourne apartment Australia access" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://www.melroseapartments.com.au/accommodation" />
+      
+      {/* Open Graph */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.melroseapartments.com.au/accommodation" />
+      <meta property="og:title" content="Studio Apartments North Melbourne - Melrose Apartments" />
+      <meta property="og:description" content="Modern Studio and Interconnecting Studio Apartments in North Melbourne. Fully equipped with all amenities. Perfect for 1-4 guests." />
+      <meta property="og:image" content="https://picsum.photos/1920/1080?random=3" />
+      
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Studio Apartments North Melbourne - Melrose Apartments" />
+      <meta name="twitter:description" content="Modern Studio and Interconnecting Studio Apartments in North Melbourne. Fully equipped with all amenities." />
+      
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Hotel",
+          "name": "Melrose Apartments - Studio Accommodation",
+          "url": "https://www.melroseapartments.com.au/accommodation",
+          "description": "Modern Studio and Interconnecting Studio Apartments in North Melbourne with fully equipped kitchens, WiFi, and all amenities",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "171 Melrose Street",
+            "addressLocality": "North Melbourne",
+            "addressRegion": "VIC",
+            "postalCode": "3051",
+            "addressCountry": "AU"
+          },
+          "containsPlace": [
+            {
+              "@type": "HotelRoom",
+              "name": "Studio Apartment",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 2
+              },
+              "bed": {
+                "@type": "BedDetails",
+                "numberOfBeds": 1,
+                "bedType": "Queen"
+              }
+            },
+            {
+              "@type": "HotelRoom",
+              "name": "Interconnecting Apartment",
+              "occupancy": {
+                "@type": "QuantitativeValue",
+                "maxValue": 4
+              }
+            }
+          ]
+        })}
+      </script>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden">
         {/* Background Image */}

@@ -119,6 +119,58 @@ const ThingsToDo = () => {
 
   return (
     <main className="pt-20">
+      <title>Things to Do Near Melrose Apartments - Melbourne Attractions & Activities</title>
+      <meta name="description" content="Discover Melbourne's best attractions near Melrose Apartments: Melbourne Zoo, Royal Botanic Gardens, Queen Victoria Market, CBD, Royal Children's Hospital, and more. All within easy reach!" />
+      <meta name="keywords" content="things to do Melbourne, Melbourne attractions, Melbourne activities, Melbourne Zoo, Royal Botanic Gardens Melbourne, Queen Victoria Market, Melbourne CBD attractions, Melbourne sightseeing, Melbourne tourism, Melbourne travel, Melbourne visitor attractions, Melbourne must see, Melbourne top attractions, Melbourne popular attractions, Melbourne famous attractions, Melbourne iconic attractions, Melbourne landmarks, Melbourne points of interest, Melbourne places to visit, Melbourne things to see, Melbourne things to experience, Melbourne entertainment, Melbourne recreation, Melbourne leisure activities, Melbourne family activities, Melbourne kids activities, Melbourne family friendly attractions, Melbourne family attractions, Melbourne children attractions, Melbourne educational attractions, Melbourne cultural attractions, Melbourne historical attractions, Melbourne natural attractions, Melbourne outdoor activities, Melbourne indoor activities, Melbourne free activities, Melbourne free attractions, Melbourne budget activities, Melbourne affordable attractions, Melbourne cheap activities, Melbourne activities near North Melbourne, Melbourne attractions near Melrose Apartments, Melbourne activities near Royal Children's Hospital, Melbourne attractions near CBD, Melbourne activities near Melbourne Zoo, Melbourne attractions near Queen Victoria Market, Melbourne activities near Royal Botanic Gardens, Melbourne attractions near Flemington Racecourse, Melbourne activities near Melbourne Museum, Melbourne attractions near State Library, Melbourne activities walking distance, Melbourne attractions tram ride, Melbourne activities public transport, Melbourne attractions easy access, Melbourne activities convenient location, Melbourne attractions close by, Melbourne activities nearby, Melbourne attractions nearby, Melbourne activities within reach, Melbourne attractions accessible, Melbourne activities accessible, Melbourne attractions wheelchair accessible, Melbourne activities wheelchair accessible, Melbourne attractions family friendly, Melbourne activities family friendly, Melbourne attractions pet friendly, Melbourne activities pet friendly, Melbourne attractions dog friendly, Melbourne activities dog friendly, Melbourne attractions stroller friendly, Melbourne activities stroller friendly, Melbourne attractions pram friendly, Melbourne activities pram friendly, Melbourne attractions baby friendly, Melbourne activities baby friendly, Melbourne attractions toddler friendly, Melbourne activities toddler friendly, Melbourne attractions senior friendly, Melbourne activities senior friendly, Melbourne attractions elderly friendly, Melbourne activities elderly friendly, Melbourne attractions disabled friendly, Melbourne activities disabled friendly, Melbourne attractions accessible parking, Melbourne activities accessible parking, Melbourne attractions parking available, Melbourne activities parking available, Melbourne attractions free parking, Melbourne activities free parking, Melbourne attractions paid parking, Melbourne activities paid parking, Melbourne attractions street parking, Melbourne activities street parking, Melbourne attractions public parking, Melbourne activities public parking, Melbourne attractions tram access, Melbourne activities tram access, Melbourne attractions bus access, Melbourne activities bus access, Melbourne attractions train access, Melbourne activities train access, Melbourne attractions public transport access, Melbourne activities public transport access, Melbourne attractions walking distance, Melbourne activities walking distance, Melbourne attractions short walk, Melbourne activities short walk, Melbourne attractions minutes away, Melbourne activities minutes away, Melbourne attractions close proximity, Melbourne activities close proximity, Melbourne attractions nearby accommodation, Melbourne activities nearby accommodation, Melbourne attractions near hotels, Melbourne activities near hotels, Melbourne attractions near serviced apartments, Melbourne activities near serviced apartments, Melbourne attractions near Melrose Apartments, Melbourne activities near Melrose Apartments, Melbourne attractions near North Melbourne, Melbourne activities near North Melbourne, Melbourne attractions VIC 3051, Melbourne activities VIC 3051, Melbourne attractions postcode 3051, Melbourne activities postcode 3051, Melbourne attractions area code 3051, Melbourne activities area code 3051, Melbourne attractions suburb North Melbourne, Melbourne activities suburb North Melbourne, Melbourne attractions inner city, Melbourne activities inner city, Melbourne attractions inner north, Melbourne activities inner north, Melbourne attractions inner Melbourne, Melbourne activities inner Melbourne, Melbourne attractions metropolitan, Melbourne activities metropolitan, Melbourne attractions Victoria, Melbourne activities Victoria, Melbourne attractions Australia, Melbourne activities Australia" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://www.melroseapartments.com.au/things-to-do" />
+      
+      {/* Open Graph */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.melroseapartments.com.au/things-to-do" />
+      <meta property="og:title" content="Things to Do Near Melrose Apartments - Melbourne Attractions" />
+      <meta property="og:description" content="Discover Melbourne's best attractions near Melrose Apartments: Melbourne Zoo, Royal Botanic Gardens, Queen Victoria Market, CBD, and more." />
+      <meta property="og:image" content="https://picsum.photos/1920/1080?random=12" />
+      
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Things to Do Near Melrose Apartments - Melbourne Attractions" />
+      <meta name="twitter:description" content="Discover Melbourne's best attractions near Melrose Apartments. All within easy reach!" />
+      
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "TouristAttraction",
+          "name": "Melbourne Attractions Near Melrose Apartments",
+          "description": "Discover Melbourne's best attractions and activities near Melrose Apartments in North Melbourne",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "North Melbourne",
+            "addressRegion": "VIC",
+            "postalCode": "3051",
+            "addressCountry": "AU"
+          },
+          "touristType": ["Family", "Business", "Couple", "Solo"],
+          "includesAttraction": [
+            {
+              "@type": "TouristAttraction",
+              "name": "Melbourne Zoo",
+              "distance": "1.5 km"
+            },
+            {
+              "@type": "TouristAttraction",
+              "name": "Royal Botanic Gardens",
+              "distance": "2 km"
+            },
+            {
+              "@type": "TouristAttraction",
+              "name": "Queen Victoria Market",
+              "distance": "1.8 km"
+            }
+          ]
+        })}
+      </script>
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden">
         {/* Background Image */}
@@ -174,7 +226,7 @@ const ThingsToDo = () => {
                   whileHover={{ y: -5, scale: 1.02 }}
                   className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="mb-4 flex justify-center">
+                  <div className="mb-4 flex ">
                     <IconComponent className="w-12 h-12" style={{ color: '#36b3a8' }} />
                   </div>
                   <h3 className="box-heading text-xl mb-3" style={{ color: '#36b3a8' }}>

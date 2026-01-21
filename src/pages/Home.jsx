@@ -49,6 +49,107 @@ const Home = () => {
 
   return (
     <main>
+      <title>Melrose Apartments - 4 Star Accommodation North Melbourne | Book Now</title>
+      <meta name="description" content="Melrose Apartments offers premium 4 star serviced accommodation in North Melbourne. Perfect location near CBD, Royal Children's Hospital, and major attractions. Book your stay today!" />
+      <meta name="keywords" content="Melrose Apartments, North Melbourne accommodation, serviced apartments Melbourne, 4 star accommodation Melbourne, studio apartments Melbourne, CBD Melbourne accommodation, Royal Children's Hospital accommodation, Melbourne serviced apartments, North Melbourne hotels, Melbourne apartment rentals, short stay Melbourne, extended stay Melbourne, Melbourne accommodation near hospital, Melbourne CBD apartments, Melbourne business accommodation, Melbourne family accommodation, Melbourne airport accommodation, CityLink Melbourne, tram route 55, tram route 59, Melbourne Zoo accommodation, Queen Victoria Market accommodation, Melbourne accommodation booking, Melbourne apartment hotel, North Melbourne VIC 3051, Melrose Street accommodation, Melbourne serviced apartments 4 star, Melbourne apartment rentals near CBD, Melbourne accommodation for families, Melbourne hospital accommodation, Melbourne medical accommodation, Melbourne relocation accommodation, Melbourne temporary accommodation, Melbourne furnished apartments, Melbourne self contained apartments, Melbourne apartment with kitchen, Melbourne accommodation with parking, Melbourne pet friendly accommodation, Melbourne wheelchair accessible accommodation, Melbourne accommodation deals, Melbourne accommodation specials, Melbourne accommodation discounts, Melbourne accommodation rates, Melbourne accommodation prices, best accommodation Melbourne, top rated accommodation Melbourne, Melbourne accommodation reviews, Melbourne accommodation ratings, Melbourne accommodation awards, Melbourne accommodation awards 2024, Melbourne accommodation awards 2025" />
+      <meta name="author" content="Melrose Apartments" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+      <meta name="googlebot" content="index, follow" />
+      <meta name="language" content="English" />
+      <meta name="revisit-after" content="7 days" />
+      <meta name="distribution" content="global" />
+      <meta name="rating" content="general" />
+      <link rel="canonical" href="https://www.melroseapartments.com.au/" />
+      
+      {/* Open Graph / Facebook */}
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.melroseapartments.com.au/" />
+      <meta property="og:title" content="Melrose Apartments - 4 Star Accommodation North Melbourne" />
+      <meta property="og:description" content="Premium 4 star serviced accommodation in North Melbourne. Perfect location near CBD, Royal Children's Hospital, and major attractions. Book your stay today!" />
+      <meta property="og:image" content="https://www.visitvictoria.com/-/media/atdw/melbourne/places-to-stay/apartments/4374e13b7f1327d5e49e390c2959297d_1600x1200.jpeg?ts=20231016310638" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:site_name" content="Melrose Apartments" />
+      <meta property="og:locale" content="en_AU" />
+      
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.melroseapartments.com.au/" />
+      <meta name="twitter:title" content="Melrose Apartments - 4 Star Accommodation North Melbourne" />
+      <meta name="twitter:description" content="Premium 4 star serviced accommodation in North Melbourne. Perfect location near CBD, Royal Children's Hospital, and major attractions." />
+      <meta name="twitter:image" content="https://www.visitvictoria.com/-/media/atdw/melbourne/places-to-stay/apartments/4374e13b7f1327d5e49e390c2959297d_1600x1200.jpeg?ts=20231016310638" />
+      
+      {/* Additional SEO */}
+      <meta name="geo.region" content="AU-VIC" />
+      <meta name="geo.placename" content="North Melbourne" />
+      <meta name="geo.position" content="-37.8065;144.9478" />
+      <meta name="ICBM" content="-37.8065, 144.9478" />
+      
+      {/* Structured Data - LocalBusiness */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Hotel",
+          "name": "Melrose Apartments",
+          "image": "https://www.visitvictoria.com/-/media/atdw/melbourne/places-to-stay/apartments/4374e13b7f1327d5e49e390c2959297d_1600x1200.jpeg?ts=20231016310638",
+          "@id": "https://www.melroseapartments.com.au/",
+          "url": "https://www.melroseapartments.com.au/",
+          "telephone": "+61-3-8379-1100",
+          "priceRange": "$$",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "171 Melrose Street",
+            "addressLocality": "North Melbourne",
+            "addressRegion": "VIC",
+            "postalCode": "3051",
+            "addressCountry": "AU"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -37.8065,
+            "longitude": 144.9478
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:30",
+            "closes": "18:30"
+          },
+          "starRating": {
+            "@type": "Rating",
+            "ratingValue": "4"
+          },
+          "description": "Melrose Apartments offers good quality 4 star accommodation in leafy North Melbourne, handy to Melbourne's CBD. Close to Melbourne's hospital precincts including the Royal Children's Hospital and Royal Women's Hospital.",
+          "amenityFeature": [
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "WiFi",
+              "value": true
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Parking",
+              "value": true
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Air Conditioning",
+              "value": true
+            },
+            {
+              "@type": "LocationFeatureSpecification",
+              "name": "Kitchen",
+              "value": true
+            }
+          ]
+        })}
+      </script>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
         {/* Background Image */}
@@ -156,7 +257,7 @@ const Home = () => {
                   whileHover={{ y: -10, scale: 1.02 }}
                   className="bg-gray-50 p-8 rounded-lg hover:shadow-xl transition-all duration-300"
                 >
-                  <div className="mb-4 flex justify-center">
+                  <div className="mb-4 flex ">
                     <IconComponent className="w-16 h-16" style={{ color: '#36b3a8' }} />
                   </div>
                   <h3 className="box-heading text-2xl mb-4" style={{ color: '#36b3a8' }}>
