@@ -111,18 +111,21 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 mt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex flex-col items-center space-y-2">
             <p className="text-gray-400 text-sm">
               &copy; {currentYear} Melrose Apartments. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-[#36b3a8] transition-colors">
-                Privacy Policy
+            <p className="text-gray-500 text-xs">
+              Website by{' '}
+              <a
+                href="https://www.nextgenwebsites.info/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#36b3a8] transition-colors underline"
+              >
+                Next Gen Websites
               </a>
-              <a href="#" className="hover:text-[#36b3a8] transition-colors">
-                Terms & Conditions
-              </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>
