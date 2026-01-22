@@ -135,7 +135,7 @@ const Enquiry = () => {
             className="bg-white rounded-lg shadow-lg p-8"
           >
             <div className="mb-6 pb-4 border-b border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2" style={{ color: '#36b3a8' }}>
+              <h2 className="text-2xl  text-gray-800 mb-2" style={{ color: '#36b3a8' }}>
                 Send Us an Enquiry
               </h2>
               <p className="text-gray-600 text-sm">
@@ -148,7 +148,7 @@ const Enquiry = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-green-50 border-2 border-green-500 text-green-700 p-6 rounded-lg text-center"
               >
-                <p className="font-semibold text-lg mb-2">Thank you for your enquiry!</p>
+                <p className=" text-lg mb-2">Thank you for your enquiry!</p>
                 <p>We've received your message and will respond as soon as possible.</p>
               </motion.div>
             ) : (

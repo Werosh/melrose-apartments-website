@@ -125,7 +125,7 @@ const Location = () => {
         })}
       </script>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden ">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
@@ -141,7 +141,7 @@ const Location = () => {
           transition={{ duration: 0.6 }}
           className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 uppercase">
+          <h1 className="text-5xl md:text-6xl  mb-6 uppercase">
             Our Location
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
@@ -151,7 +151,7 @@ const Location = () => {
       </section>
 
       {/* Address Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -160,7 +160,7 @@ const Location = () => {
             transition={{ duration: 0.6 }}
             className="max-w-4xl mx-auto text-center mb-12"
           >
-            <h2 className="text-3xl font-bold mb-6" style={{ color: '#36b3a8' }}>
+            <h2 className="text-3xl  mb-6" style={{ color: '#36b3a8' }}>
               Visit Us At
             </h2>
             <div className="bg-gray-50 p-8 rounded-lg shadow-md">
@@ -197,7 +197,7 @@ const Location = () => {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <motion.h2
@@ -236,7 +236,7 @@ const Location = () => {
       </section>
 
       {/* Directions Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -337,7 +337,7 @@ const Location = () => {
       </section>
 
       {/* Location Highlights */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
@@ -392,7 +392,7 @@ const Location = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white mx-5 md:mx-0  ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -400,7 +400,7 @@ const Location = () => {
           transition={{ duration: 0.6 }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl  mb-6">
             Ready to Visit Us?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">

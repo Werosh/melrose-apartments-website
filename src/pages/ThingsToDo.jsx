@@ -172,7 +172,7 @@ const ThingsToDo = () => {
         })}
       </script>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 overflow-hidden ">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
@@ -188,7 +188,7 @@ const ThingsToDo = () => {
           transition={{ duration: 0.6 }}
           className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 uppercase">
+          <h1 className="text-5xl md:text-6xl mb-6 uppercase">
             Things to Do
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
@@ -198,7 +198,7 @@ const ThingsToDo = () => {
       </section>
 
       {/* Transport Info */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -241,7 +241,7 @@ const ThingsToDo = () => {
       </section>
 
       {/* Attractions Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -314,7 +314,7 @@ const ThingsToDo = () => {
       </section>
 
       {/* Additional Activities */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -361,7 +361,7 @@ const ThingsToDo = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white mx-5 md:mx-0  ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

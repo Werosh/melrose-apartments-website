@@ -84,7 +84,7 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 uppercase">
+          <h1 className="text-5xl md:text-6xl  mb-6 uppercase">
             Contact Us
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
@@ -94,7 +94,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Information and Map Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             {/* Main Content Grid - Contact Info Left, Map Right */}
@@ -107,11 +107,11 @@ const Contact = () => {
                 transition={{ duration: 0.6 }}
               >
                 {/* VISIT US AT */}
-                <h2 className="text-3xl font-bold mb-6 uppercase" style={{ color: '#36b3a8' }}>
+                <h2 className="text-3xl  mb-6 uppercase" style={{ color: '#36b3a8' }}>
                   Visit Us At
                 </h2>
                 <div className="mb-8">
-                  <p className="text-xl font-bold mb-2">Melrose Apartments</p>
+                  <p className="text-xl  mb-2">Melrose Apartments</p>
                   <address className="not-italic text-gray-700 space-y-1 mb-6">
                     <p>171 Melrose Street</p>
                     <p>North Melbourne VIC 3051</p>
@@ -137,7 +137,7 @@ const Contact = () => {
                 </div>
 
                 {/* EMAIL OUR TEAM */}
-                <h2 className="text-3xl font-bold mb-4 uppercase" style={{ color: '#36b3a8' }}>
+                <h2 className="text-3xl  mb-4 uppercase" style={{ color: '#36b3a8' }}>
                   Email Our Team
                 </h2>
                 <div className="mb-8">
@@ -153,7 +153,7 @@ const Contact = () => {
                 </div>
 
                 {/* OFFICE HOURS */}
-                <h2 className="text-3xl font-bold mb-4 uppercase" style={{ color: '#36b3a8' }}>
+                <h2 className="text-3xl  mb-4 uppercase" style={{ color: '#36b3a8' }}>
                   Office Hours
                 </h2>
                 <div className="mb-8">
@@ -200,7 +200,7 @@ const Contact = () => {
                 transition={{ duration: 0.6 }}
                 className="bg-gray-50 p-6 rounded-lg"
               >
-                <h3 className="text-2xl font-bold mb-4 uppercase" style={{ color: '#36b3a8' }}>
+                <h3 className="text-2xl  mb-4 uppercase" style={{ color: '#36b3a8' }}>
                   Reservations Hours
                 </h3>
                 <p className="text-gray-700 mb-3">
@@ -227,7 +227,7 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="bg-gray-50 p-6 rounded-lg"
               >
-                <h3 className="text-2xl font-bold mb-4 uppercase" style={{ color: '#36b3a8' }}>
+                  <h3 className="text-2xl  mb-4 uppercase" style={{ color: '#36b3a8' }}>
                   Check-In Times
                 </h3>
                 <p className="text-gray-700 mb-2">
@@ -244,7 +244,7 @@ const Contact = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white mx-5 md:mx-0  ">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -252,7 +252,7 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl  mb-6">
             Ready to Book Your Stay?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">

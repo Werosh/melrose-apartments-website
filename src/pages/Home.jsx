@@ -169,7 +169,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
+          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20 md:mt-0"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-6 uppercase tracking-wide">
             Come home and relax at Melrose Apartments
@@ -202,7 +202,7 @@ const Home = () => {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 hidden md:block"
         >
           <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
             <ChevronDown className="w-3 h-3 text-white" />
@@ -211,7 +211,7 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white mx-5 md:mx-0 ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -220,7 +220,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#36b3a8' }}>
+            <h2 className="text-4xl md:text-5xl  mb-4" style={{ color: '#36b3a8' }}>
               About Melrose Apartments
             </h2>
             <div className="text-lg text-gray-600 max-w-4xl mx-auto space-y-6 text-left">
@@ -275,7 +275,7 @@ const Home = () => {
       <GoogleReviews />
 
       {/* Quick Info Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 mx-5 md:mx-0" >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -284,7 +284,7 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#36b3a8' }}>
+              <h2 className="text-4xl md:text-5xl  mb-6" style={{ color: '#36b3a8' }}>
                 Visit Us
               </h2>
               <div className="space-y-4 text-lg">
@@ -359,7 +359,7 @@ const Home = () => {
           transition={{ duration: 0.6 }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl  mb-6">
             Ready to Book Your Stay?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">
