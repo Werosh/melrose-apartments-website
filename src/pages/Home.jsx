@@ -169,9 +169,9 @@ const Home = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center mt-20 md:mt-0"
+          className="relative z-10 container mx-5  md:mx-0 px-4 sm:px-6 lg:px-8 text-center mt-40 md:mt-0"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 uppercase tracking-wide">
+          <h1 className="text-5xl md:text-7xl mb-6 uppercase tracking-wide">
             Come home and relax at Melrose Apartments
           </h1>
           <p className="text-xl md:text-2xl mb-4 text-gray-200 max-w-3xl mx-auto">

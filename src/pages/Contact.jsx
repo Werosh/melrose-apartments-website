@@ -1,9 +1,119 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Send, Printer } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import CTAButton from '../components/CTAButton';
 
+// Import image from indoor-images folder
+import room23 from '../assets/images/indoor-images/Room 23 copy.webp';
+
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // Clear status when user starts typing
+    if (submitStatus) {
+      setSubmitStatus(null);
+      setErrorMessage('');
+    }
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      setErrorMessage('Please enter your name');
+      return false;
+    }
+    if (!formData.email.trim()) {
+      setErrorMessage('Please enter your email address');
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setErrorMessage('Please enter a valid email address');
+      return false;
+    }
+    if (!formData.message.trim()) {
+      setErrorMessage('Please enter your message');
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      setSubmitStatus('error');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    setErrorMessage('');
+
+    // EmailJS configuration - Get from environment variables
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // Check if EmailJS is configured
+    if (!serviceId || !templateId || !publicKey) {
+      setSubmitStatus('error');
+      setErrorMessage(
+        'Email service is not configured. Please contact us directly at info@melroseapartments.com.au or call 1800 779 971'
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone || 'Not provided',
+          subject: formData.subject || 'General Inquiry',
+          message: formData.message,
+          to_email: 'info@melroseapartments.com.au',
+          reply_to: formData.email,
+        },
+        publicKey
+      );
+
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setSubmitStatus('error');
+      setErrorMessage(
+        error.text || 'Failed to send message. Please try again or contact us directly at info@melroseapartments.com.au'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <main className="pt-20">
       <title>Contact Melrose Apartments - Phone, Email, Address | North Melbourne</title>
@@ -17,7 +127,7 @@ const Contact = () => {
       <meta property="og:url" content="https://www.melroseapartments.com.au/contact" />
       <meta property="og:title" content="Contact Melrose Apartments - Phone, Email, Address" />
       <meta property="og:description" content="Contact Melrose Apartments at 171 Melrose Street, North Melbourne. Phone: 1800 779 971, Email: info@melroseapartments.com.au" />
-      <meta property="og:image" content="https://picsum.photos/1920/1080?random=14" />
+      <meta property="og:image" content="https://www.melroseapartments.com.au/contact" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -73,7 +183,7 @@ const Contact = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
-            backgroundImage: 'url(https://picsum.photos/1920/1080?random=14)'
+            backgroundImage: `url(${room23})`
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-800/80 to-gray-900/85"></div>
@@ -189,6 +299,165 @@ const Contact = () => {
                 </div>
               </motion.div>
             </div>
+
+            {/* Contact Form Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mt-12"
+            >
+              <div className="bg-white rounded-lg shadow-xl p-8 md:p-12">
+                <h2 className="text-3xl md:text-4xl   mb-2 uppercase" style={{ color: '#36b3a8' }}>
+                  Send Us a Message
+                </h2>
+                <p className="text-gray-600 mb-8">
+                  Fill out the form below and we'll get back to you as soon as possible
+                </p>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Name and Email Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36b3a8] focus:border-transparent outline-none transition-all"
+                        placeholder="Your full name"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Email <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36b3a8] focus:border-transparent outline-none transition-all"
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone and Subject Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36b3a8] focus:border-transparent outline-none transition-all"
+                        placeholder="+61 4XX XXX XXX"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-semibold text-gray-700 mb-2">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36b3a8] focus:border-transparent outline-none transition-all"
+                        placeholder="Booking inquiry, General question, etc."
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      rows={6}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#36b3a8] focus:border-transparent outline-none transition-all resize-vertical"
+                      placeholder="Tell us how we can help you..."
+                    />
+                  </div>
+
+                  {/* Status Messages */}
+                  {submitStatus === 'success' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg flex items-start gap-3"
+                    >
+                      <CheckCircle className="flex-shrink-0 mt-0.5" size={20} />
+                      <div>
+                        <p className="font-semibold">Message sent successfully!</p>
+                        <p className="text-sm mt-1">
+                          We've received your message and will get back to you as soon as possible.
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {submitStatus === 'error' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg flex items-start gap-3"
+                    >
+                      <AlertCircle className="flex-shrink-0 mt-0.5" size={20} />
+                      <div>
+                        <p className="font-semibold">Failed to send message</p>
+                        <p className="text-sm mt-1">
+                          {errorMessage || 'Please try again or contact us directly at info@melroseapartments.com.au'}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Submit Button */}
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`w-full md:w-auto px-8 py-4 bg-[#36b3a8] text-white font-semibold uppercase tracking-wide rounded-lg hover:bg-[#2a9d94] transition-all duration-300 flex items-center justify-center gap-2 ${
+                        isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-lg hover:-translate-y-0.5'
+                      }`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader className="animate-spin" size={20} />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={20} />
+                          Send Message
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
 
             {/* Bottom Row - Reservations Hours and Check-In Times */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">

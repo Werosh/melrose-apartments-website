@@ -1,9 +1,224 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, X } from 'lucide-react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Check, X as CloseIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
 
+// Import all indoor images
+import img3368 from '../assets/images/indoor-images/IMG_3368.webp';
+import img3369 from '../assets/images/indoor-images/IMG_3369.webp';
+import img3370 from '../assets/images/indoor-images/IMG_3370.webp';
+import img3372 from '../assets/images/indoor-images/IMG_3372.webp';
+import img3374 from '../assets/images/indoor-images/IMG_3374.webp';
+import img3375 from '../assets/images/indoor-images/IMG_3375.webp';
+import img3376 from '../assets/images/indoor-images/IMG_3376.webp';
+import img3377 from '../assets/images/indoor-images/IMG_3377.webp';
+import img3378 from '../assets/images/indoor-images/IMG_3378.webp';
+import img3379 from '../assets/images/indoor-images/IMG_3379.webp';
+import img3380 from '../assets/images/indoor-images/IMG_3380.webp';
+import img3381 from '../assets/images/indoor-images/IMG_3381.webp';
+import room23Bed from '../assets/images/indoor-images/Room 23 Bed copy.webp';
+import room23 from '../assets/images/indoor-images/Room 23 copy.webp';
+import room23Ensuite from '../assets/images/indoor-images/Room 23 Ensuite copy_converted.webp';
+import room28 from '../assets/images/indoor-images/Room 28 copy_converted.webp';
+import room33_1 from '../assets/images/indoor-images/room33-1_converted.webp';
+import room33_2 from '../assets/images/indoor-images/room33-2_converted.webp';
+import room33_3 from '../assets/images/indoor-images/room33-3_converted.webp';
+import room33_4 from '../assets/images/indoor-images/room33-4_converted.webp';
+import room33_5 from '../assets/images/indoor-images/room33-5_converted.webp';
+import room33_6 from '../assets/images/indoor-images/room33-6_converted.webp';
+import room34_1 from '../assets/images/indoor-images/Room34-1_converted.webp';
+import room34_2 from '../assets/images/indoor-images/Room34-2_converted.webp';
+import room34_3 from '../assets/images/indoor-images/Room34-3_converted.webp';
+import room34_4 from '../assets/images/indoor-images/Room34-4_converted.webp';
+import room34_5 from '../assets/images/indoor-images/Room34-5_converted.webp';
+
 const Accommodation = () => {
+  // All gallery images with SEO-optimized alt text
+  const galleryImages = useMemo(() => [
+    { 
+      src: room23, 
+      alt: 'Studio Apartment Room 23 - Modern furnished accommodation in North Melbourne with kitchen and living area',
+      title: 'Studio Apartment Room 23 - North Melbourne Accommodation'
+    },
+    { 
+      src: room23Bed, 
+      alt: 'Room 23 Bedroom - Queen size bed in modern studio apartment at Melrose Apartments North Melbourne',
+      title: 'Room 23 Bedroom - Melrose Apartments'
+    },
+    { 
+      src: room23Ensuite, 
+      alt: 'Room 23 Ensuite Bathroom - Modern bathroom facilities in studio apartment North Melbourne',
+      title: 'Room 23 Ensuite Bathroom'
+    },
+    { 
+      src: room28, 
+      alt: 'Studio Apartment Room 28 - Fully equipped self-contained accommodation in North Melbourne',
+      title: 'Studio Apartment Room 28 - North Melbourne'
+    },
+    { 
+      src: room33_1, 
+      alt: 'Interconnecting Apartment Room 33 - Spacious studio accommodation for 3-4 guests in North Melbourne',
+      title: 'Interconnecting Apartment Room 33'
+    },
+    { 
+      src: room33_2, 
+      alt: 'Room 33 Interior View - Modern furnished apartment with kitchen facilities North Melbourne',
+      title: 'Room 33 Interior View'
+    },
+    { 
+      src: room33_3, 
+      alt: 'Room 33 Living Space - Comfortable studio apartment accommodation near Melbourne CBD',
+      title: 'Room 33 Living Space'
+    },
+    { 
+      src: room33_4, 
+      alt: 'Room 33 Apartment View - Well-appointed studio apartment with modern amenities',
+      title: 'Room 33 Apartment View'
+    },
+    { 
+      src: room33_5, 
+      alt: 'Room 33 Accommodation - Self-contained studio apartment in North Melbourne',
+      title: 'Room 33 Accommodation'
+    },
+    { 
+      src: room33_6, 
+      alt: 'Room 33 Interior - Modern studio apartment with fully equipped kitchen North Melbourne',
+      title: 'Room 33 Interior'
+    },
+    { 
+      src: room34_1, 
+      alt: 'Studio Apartment Room 34 - Modern accommodation with queen bed and kitchen facilities',
+      title: 'Studio Apartment Room 34'
+    },
+    { 
+      src: room34_2, 
+      alt: 'Room 34 Interior View - Spacious studio apartment accommodation in North Melbourne',
+      title: 'Room 34 Interior View'
+    },
+    { 
+      src: room34_3, 
+      alt: 'Room 34 Living Area - Comfortable studio apartment near Royal Children\'s Hospital Melbourne',
+      title: 'Room 34 Living Area'
+    },
+    { 
+      src: room34_4, 
+      alt: 'Room 34 Apartment - Modern furnished studio accommodation with air conditioning',
+      title: 'Room 34 Apartment'
+    },
+    { 
+      src: room34_5, 
+      alt: 'Room 34 Studio View - Self-contained apartment with modern amenities North Melbourne',
+      title: 'Room 34 Studio View'
+    },
+    { 
+      src: img3368, 
+      alt: 'Melrose Apartments North Melbourne - Modern studio apartment interior with kitchen and living space',
+      title: 'Melrose Apartments Interior View'
+    },
+    { 
+      src: img3369, 
+      alt: 'North Melbourne Studio Apartment - Fully equipped accommodation with modern furnishings',
+      title: 'North Melbourne Studio Apartment'
+    },
+    { 
+      src: img3370, 
+      alt: 'Melrose Apartments Accommodation - Comfortable studio apartment with queen bed and amenities',
+      title: 'Melrose Apartments Accommodation'
+    },
+    { 
+      src: img3372, 
+      alt: 'Studio Apartment North Melbourne - Modern self-contained accommodation with kitchen facilities',
+      title: 'Studio Apartment North Melbourne'
+    },
+    { 
+      src: img3374, 
+      alt: 'Melrose Apartments Interior - Well-appointed studio apartment near Melbourne CBD',
+      title: 'Melrose Apartments Interior'
+    },
+    { 
+      src: img3375, 
+      alt: 'North Melbourne Accommodation - Modern studio apartment with air conditioning and heating',
+      title: 'North Melbourne Accommodation'
+    },
+    { 
+      src: img3376, 
+      alt: 'Studio Apartment Melbourne - Furnished accommodation with LED TV and modern amenities',
+      title: 'Studio Apartment Melbourne'
+    },
+    { 
+      src: img3377, 
+      alt: 'Melrose Apartments Room View - Comfortable studio accommodation for short or extended stays',
+      title: 'Melrose Apartments Room View'
+    },
+    { 
+      src: img3378, 
+      alt: 'North Melbourne Studio - Self-contained apartment with fully equipped kitchen and living area',
+      title: 'North Melbourne Studio'
+    },
+    { 
+      src: img3379, 
+      alt: 'Melrose Apartments Accommodation View - Modern studio apartment with queen size bed',
+      title: 'Melrose Apartments Accommodation View'
+    },
+    { 
+      src: img3380, 
+      alt: 'Studio Apartment Interior - Well-furnished accommodation in North Melbourne near CBD',
+      title: 'Studio Apartment Interior'
+    },
+    { 
+      src: img3381, 
+      alt: 'Melrose Apartments North Melbourne - Modern studio apartment with all amenities included',
+      title: 'Melrose Apartments North Melbourne'
+    },
+  ], []);
+
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((index) => {
+    setLightboxIndex(index);
+    setSelectedImage(galleryImages[index]);
+  }, [galleryImages]);
+
+  const closeLightbox = useCallback(() => {
+    setSelectedImage(null);
+  }, []);
+
+  const nextImage = useCallback(() => {
+    setLightboxIndex((currentIndex) => {
+      const nextIndex = (currentIndex + 1) % galleryImages.length;
+      setSelectedImage(galleryImages[nextIndex]);
+      return nextIndex;
+    });
+  }, [galleryImages]);
+
+  const prevImage = useCallback(() => {
+    setLightboxIndex((currentIndex) => {
+      const prevIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+      setSelectedImage(galleryImages[prevIndex]);
+      return prevIndex;
+    });
+  }, [galleryImages]);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (!selectedImage) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowRight') {
+        nextImage();
+      } else if (e.key === 'ArrowLeft') {
+        prevImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, closeLightbox, nextImage, prevImage]);
+
   const roomTypes = [
     {
       id: 1,
@@ -23,7 +238,7 @@ const Accommodation = () => {
       ],
       size: 'Similar to hotel room',
       capacity: '1-2 guests',
-      image: 'https://picsum.photos/600/400?random=1',
+      image: room23,
     },
     {
       id: 2,
@@ -43,7 +258,7 @@ const Accommodation = () => {
       ],
       size: 'Two connecting studios',
       capacity: '3-4 guests',
-      image: 'https://picsum.photos/600/400?random=2',
+      image: room33_1,
     },
   ];
 
@@ -81,7 +296,8 @@ const Accommodation = () => {
       <meta property="og:url" content="https://www.melroseapartments.com.au/accommodation" />
       <meta property="og:title" content="Studio Apartments North Melbourne - Melrose Apartments" />
       <meta property="og:description" content="Modern Studio and Interconnecting Studio Apartments in North Melbourne. Fully equipped with all amenities. Perfect for 1-4 guests." />
-      <meta property="og:image" content="https://picsum.photos/1920/1080?random=3" />
+      <meta property="og:image" content="https://www.melroseapartments.com.au/accommodation" />
+      <meta property="og:image:alt" content="Melrose Apartments - Modern Studio Accommodation in North Melbourne" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -135,7 +351,7 @@ const Accommodation = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
-            backgroundImage: 'url(https://picsum.photos/1920/1080?random=3)'
+            backgroundImage: `url(${room33_1})`
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-800/80 to-gray-900/85"></div>
@@ -202,7 +418,7 @@ const Accommodation = () => {
                 className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
                 <div className="p-8 pb-4">
-                  <h2 className="text-3xl font-bold mb-2" style={{ color: '#36b3a8' }}>
+                  <h2 className="text-3xl  mb-2" style={{ color: '#36b3a8' }}>
                     {room.name}
                   </h2>
                 </div>
@@ -210,11 +426,13 @@ const Accommodation = () => {
                 <div className="relative h-64 bg-gray-200 overflow-hidden">
                   <motion.img
                     src={room.image}
-                    alt={room.name}
+                    alt={`${room.name} - Modern studio accommodation in North Melbourne with fully equipped kitchen, queen bed, and all amenities`}
+                    title={`${room.name} - Melrose Apartments North Melbourne`}
                     className="w-full h-full object-cover"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.5 }}
                     loading="lazy"
+                    fetchPriority={index === 0 ? "high" : "auto"}
                   />
                 </div>
 
@@ -263,6 +481,138 @@ const Accommodation = () => {
         </div>
       </section>
 
+      {/* Image Gallery Section */}
+      <section className="py-20 bg-white mx-5 md:mx-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-4xl md:text-5xl   mb-4" style={{ color: '#36b3a8' }}>
+              Photo Gallery
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Take a virtual tour of our beautifully appointed apartments
+            </p>
+          </motion.div>
+
+          {/* Gallery Grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          >
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, zIndex: 10 }}
+                className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+                onClick={() => openLightbox(index)}
+              >
+                <div className="aspect-square overflow-hidden bg-gray-200">
+                  <motion.img
+                    src={image.src}
+                    alt={image.alt}
+                    title={image.title || image.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                    fetchPriority={index < 8 ? "high" : "auto"}
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <p className="text-white p-3 text-sm font-medium">{image.alt}</p>
+                </div>
+                <div className="absolute inset-0 bg-[#36b3a8]/0 group-hover:bg-[#36b3a8]/10 transition-colors duration-300"></div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
+            onClick={closeLightbox}
+          >
+            {/* Close Button */}
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              aria-label="Close lightbox"
+            >
+              <CloseIcon size={24} />
+            </motion.button>
+
+            {/* Navigation Buttons */}
+            <motion.button
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              className="absolute left-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={24} />
+            </motion.button>
+
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              className="absolute right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              aria-label="Next image"
+            >
+              <ChevronRight size={24} />
+            </motion.button>
+
+            {/* Image */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-7xl max-h-[90vh] w-full"
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                title={selectedImage.title || selectedImage.alt}
+                className="w-full h-full object-contain rounded-lg"
+                loading="eager"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+                <p className="text-white text-lg font-medium text-center">{selectedImage.alt}</p>
+                <p className="text-white/80 text-sm text-center mt-1">
+                  {lightboxIndex + 1} of {galleryImages.length}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-[#36b3a8] to-[#2a9d94] text-white mx-5 md:mx-0  ">
         <motion.div
@@ -272,7 +622,7 @@ const Accommodation = () => {
           transition={{ duration: 0.6 }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl   mb-6">
             Ready to Book?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">

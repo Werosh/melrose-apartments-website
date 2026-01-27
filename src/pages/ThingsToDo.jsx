@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import { TramFront, Car, ExternalLink, Check } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
 
+// Import hero background image
+import img3374 from '../assets/images/indoor-images/IMG_3374.webp';
+
 const ThingsToDo = () => {
   const attractions = [
     {
@@ -11,7 +14,7 @@ const ThingsToDo = () => {
       distance: '1.5 km',
       category: 'Family',
       link: 'https://www.zoo.org.au/melbourne/',
-      image: 'https://picsum.photos/400/300?random=4',
+      image: 'https://www.viridianglass.com/wp-content/uploads/2024/01/image_glassshowcase_safety_2015_liongorgeissue20_1.jpg',
     },
     {
       name: 'Royal Botanic Gardens',
@@ -20,7 +23,7 @@ const ThingsToDo = () => {
       distance: '2 km',
       category: 'Nature',
       link: 'https://www.rbg.vic.gov.au/',
-      image: 'https://picsum.photos/400/300?random=5',
+      image: 'https://www.visitmelbourne.com/-/media/atdw/melbourne/see-and-do/nature-and-wildlife/parks-and-gardens/581550ed26e339ebae5306830a485b05_1600x1200.jpeg?ts=20250904350609',
     },
     {
       name: 'Queen Victoria Market',
@@ -29,7 +32,7 @@ const ThingsToDo = () => {
       distance: '1.8 km',
       category: 'Shopping',
       link: 'https://qvm.com.au/',
-      image: 'https://picsum.photos/400/300?random=6',
+      image: 'https://imgix.theurbanlist.com/content/article/Queen_Victoria_Market.png?format=auto,compress&w=728%20728w',
     },
     {
       name: 'Melbourne CBD',
@@ -38,7 +41,7 @@ const ThingsToDo = () => {
       distance: '2.5 km',
       category: 'City',
       link: 'https://www.visitmelbourne.com/Regions/Melbourne',
-      image: 'https://picsum.photos/400/300?random=7',
+      image: 'https://whatson.melbourne.vic.gov.au/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsiZGF0YSI6IjVkNDM3ZjZjLWU4YjMtNDBkYy1iYWIyLWYxZDk5ZjE5YzZkMyIsInB1ciI6ImJsb2JfaWQifX0=--2a7be775bbcbbc9ced24383b4907ebcd0d808f4f/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fbGltaXQiOlsxMDAwLDYwMF19LCJwdXIiOiJ2YXJpYXRpb24ifX0=--0d1dec94e96bf59e4e90ca4a7c11e516560ab297/d37829c8-af9a-4b54-b9ef-321fb43a208d.jpg',
     },
     {
       name: 'Royal Children\'s Hospital',
@@ -47,7 +50,7 @@ const ThingsToDo = () => {
       distance: '0.5 km',
       category: 'Medical',
       link: 'https://www.rch.org.au/',
-      image: 'https://picsum.photos/400/300?random=8',
+      image: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/The_Royal_Children%27s_Hospital%2C_Melbourne.jpg',
     },
     {
       name: 'Flemington Racecourse',
@@ -56,7 +59,7 @@ const ThingsToDo = () => {
       distance: '2 km',
       category: 'Entertainment',
       link: 'https://www.flemington.com.au/',
-      image: 'https://picsum.photos/400/300?random=9',
+      image: 'https://content.api.news/v3/images/bin/db90e86309c4f084540fbb4800fd1461',
     },
     {
       name: 'Melbourne Museum',
@@ -65,7 +68,7 @@ const ThingsToDo = () => {
       distance: '2.2 km',
       category: 'Culture',
       link: 'https://museumsvictoria.com.au/melbournemuseum/',
-      image: 'https://picsum.photos/400/300?random=10',
+      image: 'https://museu.ms/remote.jpg.ashx?width=1000&height=450&format=jpg&mode=crop&scale=both&404=no_image.gif&urlb64=aHR0cHM6Ly9tdXNldW1zLmJsb2IuY29yZS53aW5kb3dzLm5ldC9kYXRhL0RvY3VtZW50cy9NVVNFVU1TL2F1bWVtLzI5NjgxL2F1bWVtXzIwMTEwNTE3MTE1NzAwNDk4My5wbmc&hmac=JswWi5zwgDU',
     },
     {
       name: 'State Library of Victoria',
@@ -74,7 +77,7 @@ const ThingsToDo = () => {
       distance: '2.5 km',
       category: 'Culture',
       link: 'https://www.slv.vic.gov.au/',
-      image: 'https://picsum.photos/400/300?random=11',
+      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/23/c6/c4/state-library-victoria.jpg?w=900&h=500&s=1',
     },
   ];
 
@@ -130,7 +133,7 @@ const ThingsToDo = () => {
       <meta property="og:url" content="https://www.melroseapartments.com.au/things-to-do" />
       <meta property="og:title" content="Things to Do Near Melrose Apartments - Melbourne Attractions" />
       <meta property="og:description" content="Discover Melbourne's best attractions near Melrose Apartments: Melbourne Zoo, Royal Botanic Gardens, Queen Victoria Market, CBD, and more." />
-      <meta property="og:image" content="https://picsum.photos/1920/1080?random=12" />
+      <meta property="og:image" content="https://www.melroseapartments.com.au/things-to-do" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -177,7 +180,7 @@ const ThingsToDo = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
-            backgroundImage: 'url(https://picsum.photos/1920/1080?random=12)'
+            backgroundImage: `url(${img3374})`
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-800/80 to-gray-900/85"></div>
@@ -205,7 +208,7 @@ const ThingsToDo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl font-bold mb-8 text-center"
+            className="text-3xl   mb-8 text-center"
             style={{ color: '#36b3a8' }}
           >
             Getting Around Melbourne
@@ -250,7 +253,7 @@ const ThingsToDo = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#36b3a8' }}>
+            <h2 className="text-4xl md:text-5xl   mb-4" style={{ color: '#36b3a8' }}>
               Nearby Attractions
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -292,7 +295,7 @@ const ThingsToDo = () => {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3" style={{ color: '#36b3a8' }}>
+                  <h3 className="text-xl  mb-3" style={{ color: '#36b3a8' }}>
                     {attraction.name}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-3">
@@ -321,7 +324,7 @@ const ThingsToDo = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl font-bold mb-12 text-center"
+            className="text-3xl  mb-12 text-center"
             style={{ color: '#36b3a8' }}
           >
             More Things to Explore
@@ -369,7 +372,7 @@ const ThingsToDo = () => {
           transition={{ duration: 0.6 }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl  mb-6">
             Ready to Explore Melbourne?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-100">

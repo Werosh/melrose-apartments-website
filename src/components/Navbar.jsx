@@ -34,10 +34,12 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <h1 className="navbar-text text-2xl font-bold" style={{ color: '#36b3a8' }}>
-              Melrose Apartments
-            </h1>
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/logo.png" 
+              alt="Melrose Apartments" 
+              className="h-8 sm:h-10 md:h-12 lg:h-14 w-48 object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation (lg and up) */}

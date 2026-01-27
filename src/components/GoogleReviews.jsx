@@ -110,7 +110,7 @@ const GoogleReviews = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ color: '#36b3a8' }}>
+          <h2 className="text-4xl md:text-5xl  mb-4" style={{ color: '#36b3a8' }}>
             What Our Guests Say
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -164,7 +164,7 @@ const GoogleReviews = () => {
                 {/* Reviewer Info */}
                 <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
                   <div 
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white  text-lg"
                     style={{ backgroundColor: review.color }}
                   >
                     {review.avatar}
@@ -197,7 +197,7 @@ const GoogleReviews = () => {
           >
             <div className="flex items-center justify-center mb-2">
               <Star className="w-8 h-8 fill-yellow-400 text-yellow-400" />
-              <span className="text-4xl font-bold ml-2" style={{ color: '#36b3a8' }}>
+              <span className="text-4xl  ml-2" style={{ color: '#36b3a8' }}>
                 4.5
               </span>
             </div>
@@ -208,7 +208,7 @@ const GoogleReviews = () => {
             whileHover={{ scale: 1.05 }}
             className="text-center bg-white rounded-lg p-6 shadow-lg"
           >
-            <div className="text-4xl font-bold mb-2" style={{ color: '#36b3a8' }}>
+            <div className="text-4xl  mb-2" style={{ color: '#36b3a8' }}>
               1000+
             </div>
             <div className="text-sm text-gray-600 font-semibold">Happy Guests</div>
@@ -218,7 +218,7 @@ const GoogleReviews = () => {
             whileHover={{ scale: 1.05 }}
             className="text-center bg-white rounded-lg p-6 shadow-lg"
           >
-            <div className="text-4xl font-bold mb-2" style={{ color: '#36b3a8' }}>
+            <div className="text-4xl  mb-2" style={{ color: '#36b3a8' }}>
               10+
             </div>
             <div className="text-sm text-gray-600 font-semibold">Years Experience</div>

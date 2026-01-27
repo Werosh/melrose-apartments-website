@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import { MapPin, TramFront, Car, Navigation } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
 
+// Import image from indoor-images folder
+import img3375 from '../assets/images/indoor-images/IMG_3375.webp';
+
 const Location = () => {
   const address = {
     street: '171 Melrose Street',
@@ -89,7 +92,7 @@ const Location = () => {
       <meta property="og:url" content="https://www.melroseapartments.com.au/location" />
       <meta property="og:title" content="Location & Directions - Melrose Apartments North Melbourne" />
       <meta property="og:description" content="Find us at 171 Melrose Street, North Melbourne VIC 3051. Easy access via tram routes 55 & 59, CityLink, M2, and Melbourne Airport." />
-      <meta property="og:image" content="https://picsum.photos/1920/1080?random=13" />
+      <meta property="og:image" content="https://www.melroseapartments.com.au/location" />
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -130,7 +133,7 @@ const Location = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{
-            backgroundImage: 'url(https://picsum.photos/1920/1080?random=13)'
+            backgroundImage: `url(${img3375})`
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/85 via-gray-800/80 to-gray-900/85"></div>
@@ -164,7 +167,7 @@ const Location = () => {
               Visit Us At
             </h2>
             <div className="bg-gray-50 p-8 rounded-lg shadow-md">
-              <p className="text-2xl font-bold mb-2">Melrose Apartments</p>
+              <p className="text-2xl   mb-2">Melrose Apartments</p>
               <p className="text-xl text-gray-700">{address.street}</p>
               <p className="text-xl text-gray-700">{address.suburb}</p>
               <p className="text-xl text-gray-700 mb-6">{address.country}</p>
@@ -205,7 +208,7 @@ const Location = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl font-bold mb-8 text-center"
+              className="text-3xl  mb-8 text-center"
               style={{ color: '#36b3a8' }}
             >
               Find Us on the Map
@@ -247,7 +250,7 @@ const Location = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-8" style={{ color: '#36b3a8' }}>
+                <h2 className="text-3xl  nmb-8" style={{ color: '#36b3a8' }}>
                   Getting to Us by Public Transport
                 </h2>
                 <div className="space-y-6">
@@ -279,7 +282,7 @@ const Location = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <h2 className="text-3xl font-bold mb-8" style={{ color: '#36b3a8' }}>
+                <h2 className="text-3xl   mb-8" style={{ color: '#36b3a8' }}>
                   Getting to Us from Melbourne Airport (Tullamarine)
                 </h2>
                 <div className="space-y-6">
@@ -302,7 +305,7 @@ const Location = () => {
                         <ul className="space-y-2 text-gray-700">
                           {method.steps.map((step, stepIndex) => (
                             <li key={stepIndex} className="flex items-start">
-                              <span className="text-[#36b3a8] mr-2 font-bold">
+                              <span className="text-[#36b3a8] mr-2  ">
                                 {stepIndex + 1}.
                               </span>
                               <span>{step}</span>
@@ -345,7 +348,7 @@ const Location = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl font-bold mb-8"
+              className="text-3xl   mb-8"
               style={{ color: '#36b3a8' }}
             >
               Why Our Location is Perfect
