@@ -153,87 +153,80 @@ const Location = () => {
         </motion.div>
       </section>
 
-      {/* Address Section */}
+      {/* Address and Map Section - Side by Side */}
       <section className="py-16 bg-white mx-5 md:mx-0">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center mb-12"
-          >
-            <h2 className="text-3xl  mb-6" style={{ color: '#36b3a8' }}>
-              Visit Us At
-            </h2>
-            <div className="bg-gray-50 p-8 rounded-lg shadow-md">
-              <p className="text-2xl   mb-2">Melrose Apartments</p>
-              <p className="text-xl text-gray-700">{address.street}</p>
-              <p className="text-xl text-gray-700">{address.suburb}</p>
-              <p className="text-xl text-gray-700 mb-6">{address.country}</p>
-              <div className="space-y-3">
-                <p>
-                  <strong>Phone:</strong>{' '}
-                  <a href="tel:1800779971" className="text-[#36b3a8] hover:underline">
-                    1800 779 971
-                  </a>
-                </p>
-                <p>
-                  <strong>International:</strong>{' '}
-                  <a href="tel:+61383791100" className="text-[#36b3a8] hover:underline">
-                    +61 3 8379 1100
-                  </a>
-                </p>
-                <p>
-                  <strong>Email:</strong>{' '}
-                  <a
-                    href="mailto:info@melroseapartments.com.au"
-                    className="text-[#36b3a8] hover:underline"
-                  >
-                    info@melroseapartments.com.au
-                  </a>
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+              {/* Left Column - Visit Us At */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="lg:sticky lg:top-24"
+              >
+                <h2 className="text-3xl mb-6" style={{ color: '#36b3a8' }}>
+                  Visit Us At
+                </h2>
+                <div className="bg-gray-50 p-8 rounded-lg shadow-md">
+                  <p className="text-2xl mb-2 font-semibold">Melrose Apartments</p>
+                  <p className="text-xl text-gray-700">{address.street}</p>
+                  <p className="text-xl text-gray-700">{address.suburb}</p>
+                  <p className="text-xl text-gray-700 mb-6">{address.country}</p>
+                  <div className="space-y-4 pt-4 border-t border-gray-200">
+                    <p>
+                      <strong className="text-gray-800">Phone:</strong>{' '}
+                      <a href="tel:1800779971" className="text-[#36b3a8] hover:underline">
+                        1800 779 971
+                      </a>
+                    </p>
+                    <p>
+                      <strong className="text-gray-800">International:</strong>{' '}
+                      <a href="tel:+61383791100" className="text-[#36b3a8] hover:underline">
+                        +61 3 8379 1100
+                      </a>
+                    </p>
+                    <p>
+                      <strong className="text-gray-800">Email:</strong>{' '}
+                      <a
+                        href="mailto:info@melroseapartments.com.au"
+                        className="text-[#36b3a8] hover:underline break-all"
+                      >
+                        info@melroseapartments.com.au
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
 
-      {/* Map Section */}
-      <section className="py-16 bg-gray-50 mx-5 md:mx-0">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl  mb-8 text-center"
-              style={{ color: '#36b3a8' }}
-            >
-              Find Us on the Map
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-gray-100 rounded-lg shadow-xl overflow-hidden"
-            >
-              <div className="h-96 w-full relative">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d197.06054399264772!2d144.94212291720498!3d-37.79077319954816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d2170d49357%3A0xf47b31520e10a345!2sMelrose%20Apartments!5e0!3m2!1sen!2slk!4v1768970159962!5m2!1sen!2slk"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, filter: 'grayscale(50%)' }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Melrose Apartments Location - 171 Melrose Street, North Melbourne VIC 3051"
-                  aria-label="Google Maps showing Melrose Apartments location"
-                ></iframe>
-              </div>
-            </motion.div>
+              {/* Right Column - Find Us on the Map */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl mb-6" style={{ color: '#36b3a8' }}>
+                  Find Us on the Map
+                </h2>
+                <div className="bg-gray-100 rounded-lg shadow-xl overflow-hidden">
+                  <div className="h-96 lg:h-[500px] w-full relative">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d197.06054399264772!2d144.94212291720498!3d-37.79077319954816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d2170d49357%3A0xf47b31520e10a345!2sMelrose%20Apartments!5e0!3m2!1sen!2slk!4v1768970159962!5m2!1sen!2slk"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0, filter: 'grayscale(50%)' }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Melrose Apartments Location - 171 Melrose Street, North Melbourne VIC 3051"
+                      aria-label="Google Maps showing Melrose Apartments location"
+                    ></iframe>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>

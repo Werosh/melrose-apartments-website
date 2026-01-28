@@ -19,7 +19,7 @@ import img3380 from '../assets/images/indoor-images/IMG_3380.webp';
 import img3381 from '../assets/images/indoor-images/IMG_3381.webp';
 import room23Bed from '../assets/images/indoor-images/Room 23 Bed copy.webp';
 import room23 from '../assets/images/indoor-images/Room 23 copy.webp';
-import room23Ensuite from '../assets/images/indoor-images/Room 23 Ensuite copy_converted.webp';
+// import room23Ensuite from '../assets/images/indoor-images/Room 23 Ensuite copy_converted.webp';
 import room28 from '../assets/images/indoor-images/Room 28 copy_converted.webp';
 import room33_1 from '../assets/images/indoor-images/room33-1_converted.webp';
 import room33_2 from '../assets/images/indoor-images/room33-2_converted.webp';
@@ -34,6 +34,8 @@ import room34_4 from '../assets/images/indoor-images/Room34-4_converted.webp';
 import room34_5 from '../assets/images/indoor-images/Room34-5_converted.webp';
 
 const Accommodation = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState({ 1: 0, 2: 0 });
+
   // All gallery images with SEO-optimized alt text
   const galleryImages = useMemo(() => [
     { 
@@ -46,11 +48,11 @@ const Accommodation = () => {
       alt: 'Room 23 Bedroom - Queen size bed in modern studio apartment at Melrose Apartments North Melbourne',
       title: 'Room 23 Bedroom - Melrose Apartments'
     },
-    { 
-      src: room23Ensuite, 
-      alt: 'Room 23 Ensuite Bathroom - Modern bathroom facilities in studio apartment North Melbourne',
-      title: 'Room 23 Ensuite Bathroom'
-    },
+    // { 
+    //   src: room23Ensuite, 
+    //   alt: 'Room 23 Ensuite Bathroom - Modern bathroom facilities in studio apartment North Melbourne',
+    //   title: 'Room 23 Ensuite Bathroom'
+    // },
     { 
       src: room28, 
       alt: 'Studio Apartment Room 28 - Fully equipped self-contained accommodation in North Melbourne',
@@ -176,6 +178,50 @@ const Accommodation = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
+  // Define room types with their images
+  const roomTypes = useMemo(() => [
+    {
+      id: 1,
+      name: 'Studio Apartment',
+      description:
+        'Our Studio Apartments are well setup for one or two guests staying a few days or a week. They are a similar size to a hotel room with many additional features including:',
+      features: [
+        'Queen size bed',
+        'Fully equipped kitchen with microwave',
+        'Colour LED TV',
+        'Direct dial phone',
+        'Wifi Internet (fee applies)',
+        'Voice mail',
+        'Radio / alarm clock',
+        'Individual air-conditioning and heating',
+        'Iron and ironing board',
+      ],
+      size: 'Similar to hotel room',
+      capacity: '1-2 guests',
+      images: [room23, room23Bed, img3381, room28],
+    },
+    {
+      id: 2,
+      name: 'Interconnecting Apartment',
+      description:
+        'Our Interconnecting Studio Apartments are well setup for three or four guests staying a few days or a week. Two studio apartments connect to form one larger apartment. They are a similar size to a hotel room with many additional features including:',
+      features: [
+        'Queen size bed',
+        'Fully equipped kitchen with microwave',
+        'Colour LED TV',
+        'Direct dial phone',
+        'Wifi Internet (fee applies)',
+        'Voice mail',
+        'Radio / alarm clock',
+        'Individual air-conditioning and heating',
+        'Iron and ironing board',
+      ],
+      size: 'Two connecting studios',
+      capacity: '3-4 guests',
+      images: [room33_1, room33_2, room33_3, room33_4, room33_5, room33_6, room34_1, room34_2, room34_3, room34_4, room34_5],
+    },
+  ], []);
+
   const openLightbox = useCallback((index) => {
     setLightboxIndex(index);
     setSelectedImage(galleryImages[index]);
@@ -201,6 +247,50 @@ const Accommodation = () => {
     });
   }, [galleryImages]);
 
+  // Slideshow navigation for room images
+  const nextRoomImage = useCallback((roomId) => {
+    setCurrentImageIndex((prev) => {
+      const room = roomTypes.find(r => r.id === roomId);
+      if (!room || !room.images) return prev;
+      return {
+        ...prev,
+        [roomId]: (prev[roomId] + 1) % room.images.length
+      };
+    });
+  }, [roomTypes]);
+
+  const prevRoomImage = useCallback((roomId) => {
+    setCurrentImageIndex((prev) => {
+      const room = roomTypes.find(r => r.id === roomId);
+      if (!room || !room.images) return prev;
+      return {
+        ...prev,
+        [roomId]: (prev[roomId] - 1 + room.images.length) % room.images.length
+      };
+    });
+  }, [roomTypes]);
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const intervals = {};
+    roomTypes.forEach((room) => {
+      if (room.images && room.images.length > 1) {
+        intervals[room.id] = setInterval(() => {
+          setCurrentImageIndex((prev) => ({
+            ...prev,
+            [room.id]: (prev[room.id] + 1) % room.images.length
+          }));
+        }, 5000); // Change image every 5 seconds
+      }
+    });
+
+    return () => {
+      Object.values(intervals).forEach((interval) => {
+        if (interval) clearInterval(interval);
+      });
+    };
+  }, [roomTypes]);
+
   // Keyboard navigation for lightbox
   useEffect(() => {
     if (!selectedImage) return;
@@ -218,49 +308,6 @@ const Accommodation = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedImage, closeLightbox, nextImage, prevImage]);
-
-  const roomTypes = [
-    {
-      id: 1,
-      name: 'Studio Apartment',
-      description:
-        'Our Studio Apartments are well setup for one or two guests staying a few days or a week. They are a similar size to a hotel room with many additional features including:',
-      features: [
-        'Queen size bed',
-        'Fully equipped kitchen with microwave',
-        'Colour LED TV',
-        'Direct dial phone',
-        'Wifi Internet (fee applies)',
-        'Voice mail',
-        'Radio / alarm clock',
-        'Individual air-conditioning and heating',
-        'Iron and ironing board',
-      ],
-      size: 'Similar to hotel room',
-      capacity: '1-2 guests',
-      image: room23,
-    },
-    {
-      id: 2,
-      name: 'Interconnecting Apartment',
-      description:
-        'Our Interconnecting Studio Apartments are well setup for three or four guests staying a few days or a week. Two studio apartments connect to form one larger apartment. They are a similar size to a hotel room with many additional features including:',
-      features: [
-        'Queen size bed',
-        'Fully equipped kitchen with microwave',
-        'Colour LED TV',
-        'Direct dial phone',
-        'Wifi Internet (fee applies)',
-        'Voice mail',
-        'Radio / alarm clock',
-        'Individual air-conditioning and heating',
-        'Iron and ironing board',
-      ],
-      size: 'Two connecting studios',
-      capacity: '3-4 guests',
-      image: room33_1,
-    },
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -422,18 +469,75 @@ const Accommodation = () => {
                     {room.name}
                   </h2>
                 </div>
-                {/* Room Image */}
-                <div className="relative h-64 bg-gray-200 overflow-hidden">
-                  <motion.img
-                    src={room.image}
-                    alt={`${room.name} - Modern studio accommodation in North Melbourne with fully equipped kitchen, queen bed, and all amenities`}
-                    title={`${room.name} - Melrose Apartments North Melbourne`}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.5 }}
-                    loading="lazy"
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                  />
+                {/* Room Image Slideshow */}
+                <div className="relative h-96 md:h-[450px] bg-gray-200 overflow-hidden group">
+                  {room.images && room.images.length > 0 && (
+                    <>
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={currentImageIndex[room.id]}
+                          src={room.images[currentImageIndex[room.id]]}
+                          alt={`${room.name} - Modern studio accommodation in North Melbourne with fully equipped kitchen, queen bed, and all amenities`}
+                          title={`${room.name} - Melrose Apartments North Melbourne`}
+                          className="w-full h-full object-cover"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          loading="lazy"
+                          fetchPriority={index === 0 ? "high" : "auto"}
+                        />
+                      </AnimatePresence>
+                      
+                      {/* Navigation Arrows */}
+                      {room.images.length > 1 && (
+                        <>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              prevRoomImage(room.id);
+                            }}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                            aria-label="Previous image"
+                          >
+                            <ChevronLeft size={24} />
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              nextRoomImage(room.id);
+                            }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                            aria-label="Next image"
+                          >
+                            <ChevronRight size={24} />
+                          </button>
+                          
+                          {/* Slide Indicators */}
+                          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                            {room.images.map((_, idx) => (
+                              <button
+                                key={idx}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setCurrentImageIndex((prev) => ({
+                                    ...prev,
+                                    [room.id]: idx
+                                  }));
+                                }}
+                                className={`h-2 rounded-full transition-all duration-300 ${
+                                  currentImageIndex[room.id] === idx
+                                    ? 'bg-white w-8'
+                                    : 'bg-white/50 w-2 hover:bg-white/75'
+                                }`}
+                                aria-label={`Go to slide ${idx + 1}`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
                 </div>
 
                 {/* Room Content */}

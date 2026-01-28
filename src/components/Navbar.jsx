@@ -38,7 +38,7 @@ const Navbar = () => {
             <img 
               src="/logo.png" 
               alt="Melrose Apartments" 
-              className="h-8 sm:h-10 md:h-12 lg:h-14 w-48 object-contain"
+              className="h-8 sm:h-10 md:h-12 lg:h-14 md:w-[300px] w-48 object-contain"
             />
           </Link>
 
@@ -57,12 +57,14 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/enquiry"
+            <a
+              href="https://www.thebookingbutton.com.au/properties/melrosedirect"
+              target="_blank"
+              rel="noopener noreferrer"
               className="cta-button text-sm py-2 px-6"
             >
               Book Now
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button (below lg, including md) */}
@@ -100,13 +102,15 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/enquiry"
+            <a
+              href="https://www.thebookingbutton.com.au/properties/melrosedirect"
+              target="_blank"
+              rel="noopener noreferrer"
               className="cta-button text-center text-sm py-2 px-6"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Book Now
-            </Link>
+            </a>
           </div>
         </div>
       </div>
