@@ -314,7 +314,8 @@ const Accommodation = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
       },
     },
   };
@@ -325,7 +326,10 @@ const Accommodation = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        mass: 0.8,
       },
     },
   };
@@ -406,7 +410,12 @@ const Accommodation = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            mass: 0.8
+          }}
           className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <h1 className="text-5xl md:text-6xl  mb-6 uppercase md:leading-[1.2]">
@@ -424,8 +433,13 @@ const Accommodation = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+              mass: 0.8
+            }}
             className="max-w-4xl mx-auto text-center mb-12"
           >
             <div className="space-y-6 text-lg text-gray-700">
@@ -461,8 +475,17 @@ const Accommodation = () => {
               <motion.div
                 key={room.id}
                 variants={itemVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
+                whileHover={{ 
+                  y: -10, 
+                  scale: 1.02,
+                  transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }
+                }}
+                className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                style={{ willChange: 'transform' }}
               >
                 <div className="p-8 pb-4">
                   <h2 className="text-3xl  mb-2" style={{ color: '#36b3a8' }}>
@@ -480,10 +503,14 @@ const Accommodation = () => {
                           alt={`${room.name} - Modern studio accommodation in North Melbourne with fully equipped kitchen, queen bed, and all amenities`}
                           title={`${room.name} - Melrose Apartments North Melbourne`}
                           className="w-full h-full object-cover"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
+                          initial={{ opacity: 0, scale: 1.05 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{ 
+                            opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                            scale: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+                          }}
+                          style={{ willChange: 'opacity, transform' }}
                           loading="lazy"
                           fetchPriority={index === 0 ? "high" : "auto"}
                         />
@@ -492,31 +519,37 @@ const Accommodation = () => {
                       {/* Navigation Arrows */}
                       {room.images.length > 1 && (
                         <>
-                          <button
+                          <motion.button
                             onClick={(e) => {
                               e.stopPropagation();
                               prevRoomImage(room.id);
                             }}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 z-10"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
                             aria-label="Previous image"
                           >
                             <ChevronLeft size={24} />
-                          </button>
-                          <button
+                          </motion.button>
+                          <motion.button
                             onClick={(e) => {
                               e.stopPropagation();
                               nextRoomImage(room.id);
                             }}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 z-10"
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
                             aria-label="Next image"
                           >
                             <ChevronRight size={24} />
-                          </button>
+                          </motion.button>
                           
                           {/* Slide Indicators */}
                           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                             {room.images.map((_, idx) => (
-                              <button
+                              <motion.button
                                 key={idx}
                                 onClick={(e) => {
                                   e.stopPropagation();
@@ -525,11 +558,20 @@ const Accommodation = () => {
                                     [room.id]: idx
                                   }));
                                 }}
-                                className={`h-2 rounded-full transition-all duration-300 ${
+                                className={`h-2 rounded-full ${
                                   currentImageIndex[room.id] === idx
-                                    ? 'bg-white w-8'
-                                    : 'bg-white/50 w-2 hover:bg-white/75'
+                                    ? 'bg-white'
+                                    : 'bg-white/50 hover:bg-white/75'
                                 }`}
+                                animate={{
+                                  width: currentImageIndex[room.id] === idx ? 32 : 8,
+                                }}
+                                whileHover={{ scale: 1.2 }}
+                                transition={{ 
+                                  type: "spring",
+                                  stiffness: 300,
+                                  damping: 20
+                                }}
                                 aria-label={`Go to slide ${idx + 1}`}
                               />
                             ))}
@@ -569,8 +611,13 @@ const Accommodation = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+              mass: 0.8
+            }}
             className="text-center mt-12"
           >
             {roomTypes.find(r => r.id === 1) && (
@@ -591,8 +638,13 @@ const Accommodation = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+              mass: 0.8
+            }}
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl   mb-4" style={{ color: '#36b3a8' }}>
@@ -615,16 +667,33 @@ const Accommodation = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, zIndex: 10 }}
-                className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+                whileHover={{ 
+                  scale: 1.05, 
+                  zIndex: 10,
+                  transition: {
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 20
+                  }
+                }}
+                className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
                 onClick={() => openLightbox(index)}
+                style={{ willChange: 'transform' }}
               >
                 <div className="aspect-square overflow-hidden bg-gray-200">
                   <motion.img
                     src={image.src}
                     alt={image.alt}
                     title={image.title || image.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ 
+                      type: "spring",
+                      stiffness: 200,
+                      damping: 20,
+                      duration: 0.6
+                    }}
+                    style={{ willChange: 'transform' }}
                     loading="lazy"
                     fetchPriority={index < 8 ? "high" : "auto"}
                   />
@@ -646,16 +715,25 @@ const Accommodation = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4"
             onClick={closeLightbox}
+            style={{ willChange: 'opacity' }}
           >
             {/* Close Button */}
             <motion.button
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 400,
+                damping: 17
+              }}
               onClick={closeLightbox}
-              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm"
               aria-label="Close lightbox"
             >
               <CloseIcon size={24} />
@@ -666,11 +744,18 @@ const Accommodation = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
+              whileHover={{ scale: 1.1, x: -5 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 400,
+                damping: 17
+              }}
               onClick={(e) => {
                 e.stopPropagation();
                 prevImage();
               }}
-              className="absolute left-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              className="absolute left-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm"
               aria-label="Previous image"
             >
               <ChevronLeft size={24} />
@@ -680,11 +765,18 @@ const Accommodation = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 20 }}
+              whileHover={{ scale: 1.1, x: 5 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 400,
+                damping: 17
+              }}
               onClick={(e) => {
                 e.stopPropagation();
                 nextImage();
               }}
-              className="absolute right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm transition-colors"
+              className="absolute right-4 z-10 bg-white/10 hover:bg-white/20 text-white p-3 rounded-full backdrop-blur-sm"
               aria-label="Next image"
             >
               <ChevronRight size={24} />
@@ -692,12 +784,18 @@ const Accommodation = () => {
 
             {/* Image */}
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 200,
+                damping: 25,
+                mass: 0.8
+              }}
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-7xl max-h-[90vh] w-full"
+              style={{ willChange: 'transform, opacity' }}
             >
               <img
                 src={selectedImage.src}
@@ -722,8 +820,13 @@ const Accommodation = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ 
+            type: "spring",
+            stiffness: 100,
+            damping: 20,
+            mass: 0.8
+          }}
           className="container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <h2 className="text-4xl md:text-5xl   mb-6">
