@@ -79,6 +79,24 @@ const ThingsToDo = () => {
       link: 'https://www.slv.vic.gov.au/',
       image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/23/c6/c4/state-library-victoria.jpg?w=900&h=500&s=1',
     },
+    {
+      name: 'Peter MacCallum Cancer Centre',
+      description:
+        'Australia\'s leading cancer research, education and treatment centre. Conveniently located for patients and visitors.',
+      distance: '1.2 km',
+      category: 'Medical',
+      link: 'https://www.petermac.org/',
+      image: 'https://media2.architecturemedia.net/site_media/media/cache/1f/8c/1f8c94443b995315c9dbd325f5e05e55.jpg',
+    },
+    {
+      name: 'University of Melbourne',
+      description:
+        'Explore one of Australia\'s leading universities with beautiful historic buildings, museums, and cultural events.',
+      distance: '2 km',
+      category: 'Education',
+      link: 'https://www.unimelb.edu.au/',
+      image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/d3/49/1c/caption.jpg?w=900&h=500&s=1',
+    },
   ];
 
   const transportInfo = [
@@ -123,7 +141,7 @@ const ThingsToDo = () => {
   return (
     <main className="pt-20">
       <title>Things to Do Near Melrose Apartments - Melbourne Attractions & Activities</title>
-      <meta name="description" content="Discover Melbourne's best attractions near Melrose Apartments: Melbourne Zoo, Royal Botanic Gardens, Queen Victoria Market, CBD, Royal Children's Hospital, and more. All within easy reach!" />
+      <meta name="description" content="Discover Melbourne's best attractions near Melrose Apartments: Melbourne Zoo, Royal Botanic Gardens, Queen Victoria Market, CBD, Royal Children's Hospital, Peter MacCallum Cancer Centre, University of Melbourne, and more. All within easy reach!" />
       <meta name="keywords" content="things to do Melbourne, Melbourne attractions, Melbourne activities, Melbourne Zoo, Royal Botanic Gardens Melbourne, Queen Victoria Market, Melbourne CBD attractions, Melbourne sightseeing, Melbourne tourism, Melbourne travel, Melbourne visitor attractions, Melbourne must see, Melbourne top attractions, Melbourne popular attractions, Melbourne famous attractions, Melbourne iconic attractions, Melbourne landmarks, Melbourne points of interest, Melbourne places to visit, Melbourne things to see, Melbourne things to experience, Melbourne entertainment, Melbourne recreation, Melbourne leisure activities, Melbourne family activities, Melbourne kids activities, Melbourne family friendly attractions, Melbourne family attractions, Melbourne children attractions, Melbourne educational attractions, Melbourne cultural attractions, Melbourne historical attractions, Melbourne natural attractions, Melbourne outdoor activities, Melbourne indoor activities, Melbourne free activities, Melbourne free attractions, Melbourne budget activities, Melbourne affordable attractions, Melbourne cheap activities, Melbourne activities near North Melbourne, Melbourne attractions near Melrose Apartments, Melbourne activities near Royal Children's Hospital, Melbourne attractions near CBD, Melbourne activities near Melbourne Zoo, Melbourne attractions near Queen Victoria Market, Melbourne activities near Royal Botanic Gardens, Melbourne attractions near Flemington Racecourse, Melbourne activities near Melbourne Museum, Melbourne attractions near State Library, Melbourne activities walking distance, Melbourne attractions tram ride, Melbourne activities public transport, Melbourne attractions easy access, Melbourne activities convenient location, Melbourne attractions close by, Melbourne activities nearby, Melbourne attractions nearby, Melbourne activities within reach, Melbourne attractions accessible, Melbourne activities accessible, Melbourne attractions wheelchair accessible, Melbourne activities wheelchair accessible, Melbourne attractions family friendly, Melbourne activities family friendly, Melbourne attractions pet friendly, Melbourne activities pet friendly, Melbourne attractions dog friendly, Melbourne activities dog friendly, Melbourne attractions stroller friendly, Melbourne activities stroller friendly, Melbourne attractions pram friendly, Melbourne activities pram friendly, Melbourne attractions baby friendly, Melbourne activities baby friendly, Melbourne attractions toddler friendly, Melbourne activities toddler friendly, Melbourne attractions senior friendly, Melbourne activities senior friendly, Melbourne attractions elderly friendly, Melbourne activities elderly friendly, Melbourne attractions disabled friendly, Melbourne activities disabled friendly, Melbourne attractions accessible parking, Melbourne activities accessible parking, Melbourne attractions parking available, Melbourne activities parking available, Melbourne attractions free parking, Melbourne activities free parking, Melbourne attractions paid parking, Melbourne activities paid parking, Melbourne attractions street parking, Melbourne activities street parking, Melbourne attractions public parking, Melbourne activities public parking, Melbourne attractions tram access, Melbourne activities tram access, Melbourne attractions bus access, Melbourne activities bus access, Melbourne attractions train access, Melbourne activities train access, Melbourne attractions public transport access, Melbourne activities public transport access, Melbourne attractions walking distance, Melbourne activities walking distance, Melbourne attractions short walk, Melbourne activities short walk, Melbourne attractions minutes away, Melbourne activities minutes away, Melbourne attractions close proximity, Melbourne activities close proximity, Melbourne attractions nearby accommodation, Melbourne activities nearby accommodation, Melbourne attractions near hotels, Melbourne activities near hotels, Melbourne attractions near serviced apartments, Melbourne activities near serviced apartments, Melbourne attractions near Melrose Apartments, Melbourne activities near Melrose Apartments, Melbourne attractions near North Melbourne, Melbourne activities near North Melbourne, Melbourne attractions VIC 3051, Melbourne activities VIC 3051, Melbourne attractions postcode 3051, Melbourne activities postcode 3051, Melbourne attractions area code 3051, Melbourne activities area code 3051, Melbourne attractions suburb North Melbourne, Melbourne activities suburb North Melbourne, Melbourne attractions inner city, Melbourne activities inner city, Melbourne attractions inner north, Melbourne activities inner north, Melbourne attractions inner Melbourne, Melbourne activities inner Melbourne, Melbourne attractions metropolitan, Melbourne activities metropolitan, Melbourne attractions Victoria, Melbourne activities Victoria, Melbourne attractions Australia, Melbourne activities Australia" />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://www.melroseapartments.com.au/things-to-do" />
@@ -170,6 +188,16 @@ const ThingsToDo = () => {
               "@type": "TouristAttraction",
               "name": "Queen Victoria Market",
               "distance": "1.8 km"
+            },
+            {
+              "@type": "TouristAttraction",
+              "name": "Peter MacCallum Cancer Centre",
+              "distance": "1.2 km"
+            },
+            {
+              "@type": "TouristAttraction",
+              "name": "University of Melbourne",
+              "distance": "2 km"
             }
           ]
         })}
@@ -266,7 +294,7 @@ const ThingsToDo = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {attractions.map((attraction, index) => (
               <motion.div
