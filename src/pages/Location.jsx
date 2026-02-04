@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { MapPin, TramFront, Car, Navigation } from 'lucide-react';
+import { MapPin, TramFront, Car, Navigation, Train } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
 
 // Import image from indoor-images folder
@@ -17,10 +17,17 @@ const Location = () => {
       {
         title: 'Tram Route 55',
         description: 'Leaves from William Street in the CBD, get off at stop 19, Royal Children\'s Hospital',
+        icon: TramFront,
       },
       {
         title: 'Tram Route 59',
         description: 'Leaves from Elizabeth Street in the CBD, get off at stop 19, Royal Children\'s Hospital',
+        icon: TramFront,
+      },
+      {
+        title: 'Train - Flemington Bridge Station',
+        description: 'Take train Route 59 or Route 57 to Flemington Bridge Station, then a short walk to Melrose Street',
+        icon: Train,
       },
     ],
     fromAirport: [
@@ -247,24 +254,27 @@ const Location = () => {
                   Getting to Us by Public Transport
                 </h2>
                 <div className="space-y-6">
-                  {directions.publicTransport.map((route, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="bg-gray-50 p-6 rounded-lg"
-                    >
-                      <div className="flex items-center mb-3">
-                        <TramFront className="w-6 h-6 mr-3" style={{ color: '#36b3a8' }} />
-                        <h3 className="box-heading text-xl" style={{ color: '#36b3a8' }}>
-                          {route.title}
-                        </h3>
-                      </div>
-                      <p className="text-gray-700">{route.description}</p>
-                    </motion.div>
-                  ))}
+                  {directions.publicTransport.map((route, index) => {
+                    const IconComponent = route.icon || TramFront;
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                        className="bg-gray-50 p-6 rounded-lg"
+                      >
+                        <div className="flex items-center mb-3">
+                          <IconComponent className="w-6 h-6 mr-3" style={{ color: '#36b3a8' }} />
+                          <h3 className="box-heading text-xl" style={{ color: '#36b3a8' }}>
+                            {route.title}
+                          </h3>
+                        </div>
+                        <p className="text-gray-700">{route.description}</p>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </motion.div>
 

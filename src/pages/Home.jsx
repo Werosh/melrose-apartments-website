@@ -268,10 +268,13 @@ const Home = () => {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 hidden md:block"
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 hidden md:block cursor-pointer"
+          onClick={() => {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+          }}
         >
-          <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-            <ChevronDown className="w-3 h-3 text-white" />
+          <div className=" bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-white/50 hover:bg-white/30 transition-all duration-300">
+            <ChevronDown className="w-6 h-6 text-white" />
           </div>
         </motion.div>
       </section>
