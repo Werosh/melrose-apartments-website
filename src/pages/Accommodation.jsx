@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Check, X as CloseIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import CTAButton from '../components/CTAButton';
 
@@ -35,6 +35,32 @@ import room34_5 from '../assets/images/indoor-images/Room34-5_converted.webp';
 
 const Accommodation = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState({ 1: 0, 2: 0 });
+  
+  // Video slideshow state (3 videos with autoplay)
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const videoSlideshowRefs = useRef([]);
+  
+  // Image slideshow ref for direct DOM manipulation
+  const imageSlideshowRef = useRef(null);
+
+  // Video slideshow - 3 videos for main slideshow
+  const videoSlideshowVideos = useMemo(() => [
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+      poster: room33_1,
+      title: 'Studio Apartment Tour',
+    },
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+      poster: room23,
+      title: 'Interconnecting Apartment Tour',
+    },
+    {
+      src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      poster: room34_1,
+      title: 'Apartment Amenities',
+    },
+  ], []);
 
   // All gallery images with SEO-optimized alt text
   const galleryImages = useMemo(() => [
@@ -247,14 +273,23 @@ const Accommodation = () => {
     });
   }, [galleryImages]);
 
+  // Handle thumbnail click - switch to image view
+  const handleThumbnailClick = useCallback((roomId, imageIndex) => {
+    setCurrentImageIndex((prev) => ({
+      ...prev,
+      [roomId]: imageIndex
+    }));
+  }, []);
+
   // Slideshow navigation for room images
   const nextRoomImage = useCallback((roomId) => {
     setCurrentImageIndex((prev) => {
       const room = roomTypes.find(r => r.id === roomId);
       if (!room || !room.images) return prev;
+      const nextIndex = (prev[roomId] + 1) % room.images.length;
       return {
         ...prev,
-        [roomId]: (prev[roomId] + 1) % room.images.length
+        [roomId]: nextIndex
       };
     });
   }, [roomTypes]);
@@ -263,23 +298,27 @@ const Accommodation = () => {
     setCurrentImageIndex((prev) => {
       const room = roomTypes.find(r => r.id === roomId);
       if (!room || !room.images) return prev;
+      const prevIndex = (prev[roomId] - 1 + room.images.length) % room.images.length;
       return {
         ...prev,
-        [roomId]: (prev[roomId] - 1 + room.images.length) % room.images.length
+        [roomId]: prevIndex
       };
     });
   }, [roomTypes]);
 
-  // Auto-slide functionality
+  // Auto-slide functionality for room images
   useEffect(() => {
     const intervals = {};
     roomTypes.forEach((room) => {
       if (room.images && room.images.length > 1) {
         intervals[room.id] = setInterval(() => {
-          setCurrentImageIndex((prev) => ({
-            ...prev,
-            [room.id]: (prev[room.id] + 1) % room.images.length
-          }));
+          setCurrentImageIndex((prev) => {
+            const nextIndex = (prev[room.id] + 1) % room.images.length;
+            return {
+              ...prev,
+              [room.id]: nextIndex
+            };
+          });
         }, 5000); // Change image every 5 seconds
       }
     });
@@ -290,6 +329,63 @@ const Accommodation = () => {
       });
     };
   }, [roomTypes]);
+
+  // Video slideshow autoplay - cycle through 3 videos
+  useEffect(() => {
+    const videoRefsArray = videoSlideshowRefs.current;
+    
+    const videoSlideshowInterval = setInterval(() => {
+      setCurrentVideoIndex((prev) => {
+        const nextIndex = (prev + 1) % videoSlideshowVideos.length;
+        
+        // Pause current video
+        if (videoRefsArray[prev]) {
+          videoRefsArray[prev].pause();
+        }
+        
+        // Play next video after a short delay
+        setTimeout(() => {
+          if (videoRefsArray[nextIndex]) {
+            videoRefsArray[nextIndex].play().catch(() => {
+              // Autoplay might be blocked, that's okay
+            });
+          }
+        }, 300);
+        
+        return nextIndex;
+      });
+    }, 15000); // Change video every 15 seconds
+
+    // Auto-play first video when component mounts
+    if (videoRefsArray[0]) {
+      videoRefsArray[0].play().catch(() => {
+        // Autoplay might be blocked by browser
+      });
+    }
+
+    return () => {
+      clearInterval(videoSlideshowInterval);
+      // Pause all videos on cleanup
+      videoRefsArray.forEach((video) => {
+        if (video) {
+          video.pause();
+        }
+      });
+    };
+  }, [videoSlideshowVideos.length]);
+
+  // Setup CSS animation for smooth infinite scroll
+  useEffect(() => {
+    if (imageSlideshowRef.current) {
+      const imageWidth = 240; // Each image is 240px wide
+      const gap = 16; // 4 * 4px gap
+      const singleSetWidth = galleryImages.length * (imageWidth + gap);
+      
+      // Set CSS custom property for animation
+      imageSlideshowRef.current.style.setProperty('--scroll-width', `${singleSetWidth}px`);
+    }
+  }, [galleryImages.length]);
+
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -418,7 +514,7 @@ const Accommodation = () => {
           }}
           className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <h1 className="text-5xl md:text-6xl  mb-6 uppercase md:leading-[1.2]">
+          <h1 className="text-5xl md:text-6xl md:mt-20 mb-6 uppercase md:leading-[1.2]">
             Studio Apartments - North Melbourne Accommodation
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
@@ -427,37 +523,115 @@ const Accommodation = () => {
         </motion.div>
       </section>
 
-      {/* Introductory Content */}
-      <section className="py-16 bg-white mx-5 md:mx-0 ">
+      {/* Video Slideshow - 3 Videos with Autoplay */}
+      <section className="relative w-full h-[320px] md:h-[700px] bg-black overflow-hidden">
+        <AnimatePresence mode="wait">
+          {videoSlideshowVideos.map((video, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ 
+                opacity: currentVideoIndex === index ? 1 : 0,
+                scale: currentVideoIndex === index ? 1 : 1.05
+              }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+              className={`absolute inset-0 ${currentVideoIndex === index ? 'z-10' : 'z-0'}`}
+            >
+              <video
+                ref={(el) => (videoSlideshowRefs.current[index] = el)}
+                className="w-full h-full object-cover"
+                src={video.src}
+                poster={video.poster}
+                autoPlay={currentVideoIndex === index}
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onEnded={() => {
+                  // Auto-advance to next video when current ends
+                  if (currentVideoIndex === index) {
+                    setCurrentVideoIndex((prev) => (prev + 1) % videoSlideshowVideos.length);
+                  }
+                }}
+              />
+              {/* Video Title Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-white">{video.title}</h3>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+        
+        {/* Video Indicators */}
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+          {videoSlideshowVideos.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                // Pause current video
+                if (videoSlideshowRefs.current[currentVideoIndex]) {
+                  videoSlideshowRefs.current[currentVideoIndex].pause();
+                }
+                setCurrentVideoIndex(idx);
+                // Play selected video
+                setTimeout(() => {
+                  if (videoSlideshowRefs.current[idx]) {
+                    videoSlideshowRefs.current[idx].play().catch(() => {});
+                  }
+                }, 300);
+              }}
+              className={`h-2 rounded-full transition-all ${
+                currentVideoIndex === idx
+                  ? 'bg-white w-12'
+                  : 'bg-white/50 hover:bg-white/75 w-8'
+              }`}
+              aria-label={`Go to video ${idx + 1}`}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Image Slideshow - Horizontal Scrolling Left to Right */}
+      <section className="py-12 bg-gray-50 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ 
-              type: "spring",
-              stiffness: 100,
-              damping: 20,
-              mass: 0.8
-            }}
-            className="max-w-4xl mx-auto text-center mb-12"
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl mb-8 text-center"
+            style={{ color: '#36b3a8' }}
           >
-            <div className="space-y-6 text-lg text-gray-700">
-              <p>
-                At Apartments on Melrose we take pride in offering you great quality 4 star accommodation 
-                handy to Melbourne's CBD.
-              </p>
-              <p>
-                When choosing our accommodation you can be assured that you are selecting from a range of 
-                brand new purpose built apartments.
-              </p>
-              <p>
-                Whether you choose to stay for business or pleasure, whether you are relocating to Melbourne 
-                or whether you are staying while supporting a family member or friend staying at one of our 
-                local hospitals, Melrose Apartments has accommodation to suit your requirements.
-              </p>
+            Photo Gallery
+          </motion.h2>
+          
+          <div className="relative overflow-hidden">
+            <div
+              ref={imageSlideshowRef}
+              className="flex gap-4 infinite-scroll"
+              style={{ 
+                width: `${galleryImages.length * 2 * 256}px` // Duplicate images for infinite loop
+              }}
+            >
+              {/* Render images twice for seamless infinite loop */}
+              {[...galleryImages, ...galleryImages].map((image, index) => (
+                <motion.div
+                  key={`${image.src}-${index}`}
+                  className="shrink-0 w-[240px] h-[240px] rounded-lg overflow-hidden shadow-lg cursor-pointer"
+                  onClick={() => openLightbox(index % galleryImages.length)}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    title={image.title || image.alt}
+                    className="w-full h-full object-cover"
+                    style={{ width: '240px', height: '240px', objectFit: 'cover' }}
+                    loading={index < galleryImages.length ? "lazy" : "lazy"}
+                  />
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -492,95 +666,97 @@ const Accommodation = () => {
                     {room.name}
                   </h2>
                 </div>
-                {/* Room Image Slideshow */}
+                {/* Image Display */}
                 <div className="relative h-96 md:h-[450px] bg-gray-200 overflow-hidden group">
-                  {room.images && room.images.length > 0 && (
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={`image-${currentImageIndex[room.id]}`}
+                      src={room.images[currentImageIndex[room.id]]}
+                      alt={`${room.name} - Modern studio accommodation in North Melbourne with fully equipped kitchen, queen bed, and all amenities`}
+                      title={`${room.name} - Melrose Apartments North Melbourne`}
+                      className="w-full h-full object-cover"
+                      initial={{ opacity: 0, scale: 1.05 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ 
+                        opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
+                        scale: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+                      }}
+                      style={{ willChange: 'opacity, transform' }}
+                      loading="lazy"
+                      fetchPriority={index === 0 ? "high" : "auto"}
+                    />
+                  </AnimatePresence>
+                  
+                  {/* Navigation Arrows */}
+                  {room.images && room.images.length > 1 && (
                     <>
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={currentImageIndex[room.id]}
-                          src={room.images[currentImageIndex[room.id]]}
-                          alt={`${room.name} - Modern studio accommodation in North Melbourne with fully equipped kitchen, queen bed, and all amenities`}
-                          title={`${room.name} - Melrose Apartments North Melbourne`}
-                          className="w-full h-full object-cover"
-                          initial={{ opacity: 0, scale: 1.05 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.95 }}
-                          transition={{ 
-                            opacity: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-                            scale: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
-                          }}
-                          style={{ willChange: 'opacity, transform' }}
-                          loading="lazy"
-                          fetchPriority={index === 0 ? "high" : "auto"}
-                        />
-                      </AnimatePresence>
-                      
-                      {/* Navigation Arrows */}
-                      {room.images.length > 1 && (
-                        <>
-                          <motion.button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              prevRoomImage(room.id);
-                            }}
-                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 z-10"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                            aria-label="Previous image"
-                          >
-                            <ChevronLeft size={24} />
-                          </motion.button>
-                          <motion.button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              nextRoomImage(room.id);
-                            }}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 z-10"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                            aria-label="Next image"
-                          >
-                            <ChevronRight size={24} />
-                          </motion.button>
-                          
-                          {/* Slide Indicators */}
-                          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-                            {room.images.map((_, idx) => (
-                              <motion.button
-                                key={idx}
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  setCurrentImageIndex((prev) => ({
-                                    ...prev,
-                                    [room.id]: idx
-                                  }));
-                                }}
-                                className={`h-2 rounded-full ${
-                                  currentImageIndex[room.id] === idx
-                                    ? 'bg-white'
-                                    : 'bg-white/50 hover:bg-white/75'
-                                }`}
-                                animate={{
-                                  width: currentImageIndex[room.id] === idx ? 32 : 8,
-                                }}
-                                whileHover={{ scale: 1.2 }}
-                                transition={{ 
-                                  type: "spring",
-                                  stiffness: 300,
-                                  damping: 20
-                                }}
-                                aria-label={`Go to slide ${idx + 1}`}
-                              />
-                            ))}
-                          </div>
-                        </>
-                      )}
+                      <motion.button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          prevRoomImage(room.id);
+                        }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 z-10"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                        aria-label="Previous image"
+                      >
+                        <ChevronLeft size={24} />
+                      </motion.button>
+                      <motion.button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          nextRoomImage(room.id);
+                        }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 z-10"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                        aria-label="Next image"
+                      >
+                        <ChevronRight size={24} />
+                      </motion.button>
                     </>
                   )}
                 </div>
+
+                {/* Thumbnail Gallery */}
+                {room.images && room.images.length > 0 && (
+                  <div className="px-8 py-4 bg-gray-50">
+                    <h3 className="text-sm font-semibold text-gray-700 mb-3">View More Images</h3>
+                    <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+                      {room.images.map((image, idx) => (
+                        <motion.button
+                          key={idx}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleThumbnailClick(room.id, idx);
+                          }}
+                          className={`relative aspect-square overflow-hidden rounded-lg border-2 transition-all ${
+                            currentImageIndex[room.id] === idx
+                              ? 'border-[#36b3a8] ring-2 ring-[#36b3a8] ring-offset-2'
+                              : 'border-transparent hover:border-[#36b3a8]'
+                          }`}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                          aria-label={`View image ${idx + 1}`}
+                        >
+                          <img
+                            src={image}
+                            alt={`${room.name} - Image ${idx + 1}`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                          {currentImageIndex[room.id] === idx && (
+                            <div className="absolute inset-0 bg-[#36b3a8]/20"></div>
+                          )}
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Room Content */}
                 <div className="px-8 pb-8">
@@ -632,8 +808,8 @@ const Accommodation = () => {
         </div>
       </section>
 
-      {/* Image Gallery Section */}
-      <section className="py-20 bg-white mx-5 md:mx-0">
+      {/* Introductory Content */}
+      <section className="py-16 bg-white mx-5 md:mx-0 ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -645,68 +821,27 @@ const Accommodation = () => {
               damping: 20,
               mass: 0.8
             }}
-            className="text-center mb-12"
+            className="max-w-4xl mx-auto text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl   mb-4" style={{ color: '#36b3a8' }}>
-              Photo Gallery
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Take a virtual tour of our beautifully appointed apartments
-            </p>
-          </motion.div>
-
-          {/* Gallery Grid */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-          >
-            {galleryImages.map((image, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ 
-                  scale: 1.05, 
-                  zIndex: 10,
-                  transition: {
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 20
-                  }
-                }}
-                className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
-                onClick={() => openLightbox(index)}
-                style={{ willChange: 'transform' }}
-              >
-                <div className="aspect-square overflow-hidden bg-gray-200">
-                  <motion.img
-                    src={image.src}
-                    alt={image.alt}
-                    title={image.title || image.alt}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ 
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 20,
-                      duration: 0.6
-                    }}
-                    style={{ willChange: 'transform' }}
-                    loading="lazy"
-                    fetchPriority={index < 8 ? "high" : "auto"}
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <p className="text-white p-3 text-sm font-medium">{image.alt}</p>
-                </div>
-                <div className="absolute inset-0 bg-[#36b3a8]/0 group-hover:bg-[#36b3a8]/10 transition-colors duration-300"></div>
-              </motion.div>
-            ))}
+            <div className="space-y-6 text-lg text-gray-700">
+              <p>
+                At Apartments on Melrose we take pride in offering you great quality 4 star accommodation 
+                handy to Melbourne's CBD.
+              </p>
+              <p>
+                When choosing our accommodation you can be assured that you are selecting from a range of 
+                brand new purpose built apartments.
+              </p>
+              <p>
+                Whether you choose to stay for business or pleasure, whether you are relocating to Melbourne 
+                or whether you are staying while supporting a family member or friend staying at one of our 
+                local hospitals, Melrose Apartments has accommodation to suit your requirements.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
+
 
       {/* Lightbox Modal */}
       <AnimatePresence>

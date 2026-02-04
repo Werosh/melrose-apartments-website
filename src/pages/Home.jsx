@@ -1,10 +1,76 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MapPin, Home as HomeIcon, Car, ChevronDown } from 'lucide-react';
+import { MapPin, Home as HomeIcon, Car, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
 import CTAButton from '../components/CTAButton';
 import GoogleReviews from '../components/GoogleReviews';
 
+// Import all images from indoor-images folder
+import img3368 from '../assets/images/indoor-images/IMG_3368.webp';
+import img3369 from '../assets/images/indoor-images/IMG_3369.webp';
+import img3370 from '../assets/images/indoor-images/IMG_3370.webp';
+import img3371 from '../assets/images/indoor-images/IMG_3371.webp';
+import img3372 from '../assets/images/indoor-images/IMG_3372.webp';
+import img3374 from '../assets/images/indoor-images/IMG_3374.webp';
+import img3375 from '../assets/images/indoor-images/IMG_3375.webp';
+import img3376 from '../assets/images/indoor-images/IMG_3376.webp';
+import img3377 from '../assets/images/indoor-images/IMG_3377.webp';
+import img3378 from '../assets/images/indoor-images/IMG_3378.webp';
+import img3379 from '../assets/images/indoor-images/IMG_3379.webp';
+import img3380 from '../assets/images/indoor-images/IMG_3380.webp';
+import img3381 from '../assets/images/indoor-images/IMG_3381.webp';
+import room23Bed from '../assets/images/indoor-images/Room 23 Bed copy.webp';
+import room23 from '../assets/images/indoor-images/Room 23 copy.webp';
+import room23Ensuite from '../assets/images/indoor-images/Room 23 Ensuite copy_converted.webp';
+import room28 from '../assets/images/indoor-images/Room 28 copy_converted.webp';
+import room33_1 from '../assets/images/indoor-images/room33-1_converted.webp';
+import room33_2 from '../assets/images/indoor-images/room33-2_converted.webp';
+import room33_3 from '../assets/images/indoor-images/room33-3_converted.webp';
+import room33_4 from '../assets/images/indoor-images/room33-4_converted.webp';
+import room33_5 from '../assets/images/indoor-images/room33-5_converted.webp';
+import room33_6 from '../assets/images/indoor-images/room33-6_converted.webp';
+import room34_1 from '../assets/images/indoor-images/Room34-1_converted.webp';
+import room34_2 from '../assets/images/indoor-images/Room34-2_converted.webp';
+import room34_3 from '../assets/images/indoor-images/Room34-3_converted.webp';
+import room34_4 from '../assets/images/indoor-images/Room34-4_converted.webp';
+import room34_5 from '../assets/images/indoor-images/Room34-5_converted.webp';
+
 const Home = () => {
+  // All images array
+  const allImages = [
+    img3368, img3369, img3370, img3371, img3372, img3374, img3375, img3376, img3377,
+    img3378, img3379, img3380, img3381, room23Bed, room23, room23Ensuite, room28,
+    room33_1, room33_2, room33_3, room33_4, room33_5, room33_6,
+    room34_1, room34_2, room34_3, room34_4, room34_5
+  ];
+
+  // Randomize images function
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  // State for slideshow
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [shuffledImages] = useState(() => shuffleArray(allImages));
+
+  // Navigation functions
+  const goToPrevious = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === 0 ? shuffledImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const goToNext = () => {
+    setCurrentImageIndex((prevIndex) => 
+      prevIndex === shuffledImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
   const features = [
     {
       icon: MapPin,
@@ -223,7 +289,18 @@ const Home = () => {
             <h2 className="text-4xl md:text-5xl  mb-4" style={{ color: '#36b3a8' }}>
               About Melrose Apartments
             </h2>
-            <div className="text-lg text-gray-600 max-w-4xl mx-auto space-y-6 text-left">
+          </motion.div>
+
+          {/* Two-column layout: About text on left, Slideshow on right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
+            {/* Left: About Text */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-lg text-gray-600 space-y-6"
+            >
               <p>
                 Melrose Apartments offers good quality 4 star accommodation in leafy North Melbourne, 
                 handy to Melbourne's CBD. Close to Melbourne's hospital precincts including the Royal 
@@ -238,8 +315,58 @@ const Home = () => {
                 Our North Melbourne Serviced Apartments cater for business or pleasure, relocating to 
                 Melbourne, or supporting a family member or friend staying at one of our local hospitals.
               </p>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Right: Image Slideshow */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative w-full h-[200px] md:h-[350px] rounded-lg overflow-hidden shadow-xl"
+            >
+              {/* Image */}
+              <motion.img
+                key={currentImageIndex}
+                src={shuffledImages[currentImageIndex]}
+                alt={`Melrose Apartments ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              />
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={goToPrevious}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-[#36b3a8] p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={goToNext}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-[#36b3a8] p-2 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Image Indicators */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                {shuffledImages.slice(0, Math.min(10, shuffledImages.length)).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentImageIndex ? 'bg-white w-8' : 'bg-white/50'
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
 
           <motion.div
             variants={containerVariants}
