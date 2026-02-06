@@ -53,9 +53,9 @@ const ThingsToDo = () => {
       image: 'https://upload.wikimedia.org/wikipedia/commons/7/7f/The_Royal_Children%27s_Hospital%2C_Melbourne.jpg',
     },
     {
-      name: 'Flemington Racecourse',
+      name: 'Flemington Racecourse & Showgrounds',
       description:
-        'Home to the famous Melbourne Cup. Experience horse racing or attend special events at this iconic venue.',
+        'Home to the famous Melbourne Cup and Flemington Showgrounds. Experience world-class horse racing, attend special events, exhibitions, and shows at these iconic venues - all in one convenient location.',
       distance: '2 km',
       category: 'Entertainment',
       link: 'https://www.flemington.com.au/',
