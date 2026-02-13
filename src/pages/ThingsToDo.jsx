@@ -97,12 +97,30 @@ const ThingsToDo = () => {
       link: 'https://www.unimelb.edu.au/',
       image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/d3/49/1c/caption.jpg?w=900&h=500&s=1',
     },
+    {
+      name: 'Royal Park, Parkville',
+      description:
+        'Melbourne\'s largest inner-city park featuring walking trails, sports facilities, and beautiful natural landscapes. Perfect for outdoor activities and relaxation.',
+      distance: '1.8 km',
+      category: 'Nature',
+      link: 'https://www.melbourne.vic.gov.au/royal-park',
+      image: 'https://files.wheeleasy.org/media/places/63bbc9211edd6000c5d9d28a/wheeleasy-royal-park-nature-play-playground-2.webp',
+    },
+    {
+      name: 'State Sports Centre, Parkville',
+      description:
+        'Premier sports and recreation facility offering world-class facilities for various sports, fitness activities, and community events.',
+      distance: '2 km',
+      category: 'Sports',
+      link: 'https://statesportcentres.com.au/facility-hire/parkville/',
+      image: 'https://statesportcentres.com.au/wp-content/uploads/2020/07/cropped-MSC-Home_The-State-Sport-Centre-Trust-scaled-1.jpg',
+    },
   ];
 
   const transportInfo = [
     {
       icon: TramFront,
-      title: 'Tram Route 55',
+      title: 'Tram Route 57',
       description: 'Leaves from William Street in the CBD, get off at stop 19, Royal Children\'s Hospital',
     },
     {

@@ -5,43 +5,15 @@ import { useState } from 'react';
 import CTAButton from '../components/CTAButton';
 import GoogleReviews from '../components/GoogleReviews';
 
-// Import all images from indoor-images folder
-import img3368 from '../assets/images/indoor-images/IMG_3368.webp';
-import img3369 from '../assets/images/indoor-images/IMG_3369.webp';
-import img3370 from '../assets/images/indoor-images/IMG_3370.webp';
-import img3371 from '../assets/images/indoor-images/IMG_3371.webp';
-import img3372 from '../assets/images/indoor-images/IMG_3372.webp';
-import img3374 from '../assets/images/indoor-images/IMG_3374.webp';
-import img3375 from '../assets/images/indoor-images/IMG_3375.webp';
-import img3376 from '../assets/images/indoor-images/IMG_3376.webp';
-import img3377 from '../assets/images/indoor-images/IMG_3377.webp';
-import img3378 from '../assets/images/indoor-images/IMG_3378.webp';
-import img3379 from '../assets/images/indoor-images/IMG_3379.webp';
-import img3380 from '../assets/images/indoor-images/IMG_3380.webp';
-import img3381 from '../assets/images/indoor-images/IMG_3381.webp';
-import room23Bed from '../assets/images/indoor-images/Room 23 Bed copy.webp';
-import room23 from '../assets/images/indoor-images/Room 23 copy.webp';
-import room23Ensuite from '../assets/images/indoor-images/Room 23 Ensuite copy_converted.webp';
-import room28 from '../assets/images/indoor-images/Room 28 copy_converted.webp';
-import room33_1 from '../assets/images/indoor-images/room33-1_converted.webp';
-import room33_2 from '../assets/images/indoor-images/room33-2_converted.webp';
-import room33_3 from '../assets/images/indoor-images/room33-3_converted.webp';
-import room33_4 from '../assets/images/indoor-images/room33-4_converted.webp';
-import room33_5 from '../assets/images/indoor-images/room33-5_converted.webp';
-import room33_6 from '../assets/images/indoor-images/room33-6_converted.webp';
-import room34_1 from '../assets/images/indoor-images/Room34-1_converted.webp';
-import room34_2 from '../assets/images/indoor-images/Room34-2_converted.webp';
-import room34_3 from '../assets/images/indoor-images/Room34-3_converted.webp';
-import room34_4 from '../assets/images/indoor-images/Room34-4_converted.webp';
-import room34_5 from '../assets/images/indoor-images/Room34-5_converted.webp';
+// Import all images from homepage-iamges folder
+import img1 from '../assets/images/homepage-iamges/img1.webp';
+import img2 from '../assets/images/homepage-iamges/img2.webp';
+import img3 from '../assets/images/homepage-iamges/img3.webp';
 
 const Home = () => {
   // All images array
   const allImages = [
-    img3368, img3369, img3370, img3371, img3372, img3374, img3375, img3376, img3377,
-    img3378, img3379, img3380, img3381, room23Bed, room23, room23Ensuite, room28,
-    room33_1, room33_2, room33_3, room33_4, room33_5, room33_6,
-    room34_1, room34_2, room34_3, room34_4, room34_5
+    img1, img2, img3
   ];
 
   // Randomize images function
